@@ -111,8 +111,10 @@ html {
   display: none;
  }
  .btn-secondary {
+  padding: 0;
   --bs-btn-color: #fff;
   --bs-btn-bg: #;
+  background-color: transparent;
   border: none;
   --bs-btn-border-color: #;
   --bs-btn-hover-color: #fff;
@@ -136,4 +138,7 @@ html {
 }
 ::placeholder { 
   color: #FFFFFF;
+}
+.header__bottom-list-item:not(:last-child) {
+  margin-right: 96px;
 }
