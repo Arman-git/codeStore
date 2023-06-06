@@ -101,6 +101,13 @@ html {
     text-align: center;
     color: #FFFFFF;
   }
+  .header__sign-in {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0 7px;
+}
  .header__bottom-container {
   display: flex;
   justify-content: space-between;
@@ -141,4 +148,11 @@ html {
 }
 .header__bottom-list-item:not(:last-child) {
   margin-right: 96px;
+}
+
+
+/*------------------------------------------------------------- hero -------------------------------------------------------------*/
+
+.hero__container {
+  background-image: url(../img/hero-img/1920-1.png);
 }
