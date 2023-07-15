@@ -1,6 +1,6 @@
 .content {
     overflow: hidden;
-    padding: 40px;
+    padding:  40px 0;
   }
   
   @media all and (min-width: 1024px) {
