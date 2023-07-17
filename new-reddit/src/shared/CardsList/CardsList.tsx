@@ -2,10 +2,22 @@ import React from 'react';
 import styles from './cardslist.css';
 import { Card } from './Card/Card';
 
-export function CardsList() {
+interface ICardsListProps {
+  children ?: React.ReactNode;
+}
+
+export function CardsList({ children }: ICardsListProps) {
   return (
     <ul className={styles.cardslist}>
-      <Card />
+      { children }
     </ul>
   );
 }
+
+// export function CardsList() {
+//   return (
+//     <ul className={styles.cardslist}>
+//       <Card />
+//     </ul>
+//   );
+// }

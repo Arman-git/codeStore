@@ -1,10 +1,18 @@
 import React from 'react';
 import styles from './card.css';
+import { TextContent } from './TextContent';
+import { Preview } from './Preview';
+import { Menu } from './Menu';
+import { Controls } from './Controls';
 
 export function Card() {
   return (
     <li className={styles.card}>
-        <div className={styles.textContent}>
+      <TextContent />
+      <Preview />
+      <Menu />
+      <Controls />
+        {/* <div className={styles.textContent}>
           <div className={styles.metaData}>
               <div className={styles.userLink}>
                   <img 
@@ -24,14 +32,14 @@ export function Card() {
             Реализация намеченных плановых заданий
             </a>
           </h2>
-        </div>
-        <div className={styles.preview}>
+        </div> */}
+        {/* <div className={styles.preview}>
           <img 
             className={styles.previewImg}
             src="https://cdn.dribbble.com/users/2293994/screenshots/5326648/media/9a5ecb77e427e839c778bffc68d17579.jpg"
           />
-        </div>
-        <div className={styles.menu}>
+        </div> */}
+        {/* <div className={styles.menu}>
           <button className={styles.menuButton}>
           <svg width="5" height="20" viewBox="0 0 5 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="2.5" cy="2.5" r="2.5" fill="#D9D9D9"/>
@@ -39,8 +47,8 @@ export function Card() {
           <circle cx="2.5" cy="17.5" r="2.5" fill="#D9D9D9"/>
           </svg>
           </button>
-        </div>
-        <div className={styles.controls}>
+        </div> */}
+        {/* <div className={styles.controls}>
           <div className={styles.karmaCounter}>
               <button className={styles.up}>
                 <svg width="19" height="10" viewBox="0 0 19 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +82,7 @@ export function Card() {
               </svg>
               </button>
           </div>
-        </div>
+        </div> */}
     </li>
   );
 }

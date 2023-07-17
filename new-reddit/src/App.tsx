@@ -5,13 +5,18 @@ import { Layout } from "./shared/Layout";
 import { Header } from "./shared/Header";
 import { Content } from "./shared/Content";
 import { CardsList } from "./shared/CardsList";
+import { Card } from "./shared/CardsList/Card";
+
+
 
 function AppComponent() {
     return (
         <Layout>
             <Header />
             <Content>
-                <CardsList />
+                <CardsList>
+                        <Card />
+                </CardsList> 
             </Content>
         </Layout>
     );
