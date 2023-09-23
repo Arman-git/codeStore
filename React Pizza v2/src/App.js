@@ -8,7 +8,8 @@ import "./App.css";
 // import Skeleton from "./Components/PizzaBlock/Skeleton";
 
 function App() {
-  let [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch("https://650d2478a8b42265ec2bbc08.mockapi.io/items")
