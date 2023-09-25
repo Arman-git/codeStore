@@ -13,6 +13,7 @@ function App() {
       <div className="content">
         <div className="container">
         <Home />
+        <NotFound />
         </div>
       </div>
     </div>
