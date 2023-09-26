@@ -2,15 +2,15 @@ import React from "react";
 
 function Sort({ value, onChangeSort }) {
   const [open, setOpen] = React.useState(false);
-  // const [selected, setSelected] = React.useState(0);
 
   const list = [
-    { name: "популярности", sortProperty: "rating" },
-    { name: "цена", sortProperty: "price" },
-    { name: "алфавиту", sortProperty: "title" },
+    { name: "популярности (DESC)", sortProperty: "rating" },
+    { name: "популярности (ASC)", sortProperty: "-rating" },
+    { name: "цена (DESC)", sortProperty: "price" },
+    { name: "цена (ASC)", sortProperty: "-price" },
+    { name: "алфавиту (DESC)", sortProperty: "title" },
+    { name: "алфавиту (ASC)", sortProperty: "-title" },
   ];
-  // const sortName = list[value].name;
-
   const onClickListItem = (i) => {
     onChangeSort(i);
     setOpen(false);
