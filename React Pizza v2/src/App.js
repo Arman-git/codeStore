@@ -4,8 +4,6 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Cart from "./pages/Cart";
 import { Routes, Route } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from './Redux/slices/filterSlice'
 
 import "./scss/app.scss";
 import "./App.css";
@@ -15,25 +13,12 @@ export const SearchContext = React.createContext();
 function App() {
   const [searchValue, setSearchValue] = React.useState("");
 
-  const count = useSelector((state) => state.counter.count)
-  const dispatch = useDispatch()
+  // const count = useSelector((state) => state.counter.count)
+  // const dispatch = useDispatch()
 
 
   return (
     <div className="wrapper">
-    <button
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Increment
-        </button>
-        <span>{count}</span>
-        <button
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Decrement
-        </button>
       <SearchContext.Provider value={{searchValue, setSearchValue}}>
         <Header />
         <div className="content">
