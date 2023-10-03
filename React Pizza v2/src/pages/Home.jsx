@@ -50,7 +50,7 @@ const Home = () => {
         })
       );
     }
-  }, []);
+  },);
 
   React.useEffect(() => {
     setIsLoading(true);
