@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+// import qs from "qs";
+// import { sortList } from "../Components/Sort"
+// import { setFilters } from "../Redux/slices/cartSlice"
 
 import { setCategoryId, setCurrentPage} from "../Redux/slices/filterSlice";
 import Categories from "../Components/Categories";
@@ -27,20 +30,20 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  React.useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+  // React.useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(window.location.search.substring(1));
 
-      const sort = sortList.find((obj) => obj.sortProperty === params.sort);
+  //     const sort = sortList.find((obj) => obj.sortProperty === params.sort);
       
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        })
-      );
-    }
-  }, []);
+  //     dispatch(
+  //       setFilters({
+  //         ...params,
+  //         sort,
+  //       })
+  //     );
+  //   }
+  // }, []);
 
   React.useEffect(() => {
     setIsLoading(true);
