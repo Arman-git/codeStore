@@ -102,16 +102,18 @@ const Home = () => {
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
     window.scrollTo(0, 0);
-
+    
     if (!isSearch.current) {
       fetchPizzas();
     }
-
-    isSearch.current = false;
+      
+      isSearch.current = false;
       fetchPizzas();
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+      
+    }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+    
+    const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
