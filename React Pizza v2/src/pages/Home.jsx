@@ -9,11 +9,12 @@ import { useNavigate } from "react-router-dom";
 //   PizzaBlock,
 //   Skeleton,
 //   Pagination,
+//   sortList
 // } from '../Components';
 
 // import { sortList } from "../Components/Sort.jsx"
 
-import {sortList} from '../Components/Sort'
+import {sortList} from '../Components/Sort.jsx'
 import {Categories} from '../Components/Categories'
 import {PizzaBlock} from '../Components/PizzaBlock'
 import {Skeleton} from '../Components/PizzaBlock/Skeleton'
@@ -83,6 +84,7 @@ const Home = () => {
 
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
+    
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
 
