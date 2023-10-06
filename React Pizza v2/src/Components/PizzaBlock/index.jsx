@@ -4,7 +4,7 @@ import { addItem } from "../../Redux/slices/cartSlice"
 
 const typeNames = ["тонкое", "традиционное"];
 
-function PizzaBlock({ title, price, imageUrl, sizes, types, id, rating }) {
+export const PizzaBlock = ({ title, price, imageUrl, sizes, types, id, rating }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
   const [activeType, setActiveType] = React.useState(0);

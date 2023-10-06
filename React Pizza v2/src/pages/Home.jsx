@@ -3,23 +3,24 @@ import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
-  Categories,
-  Sort,
-  PizzaBlock,
-  Skeleton,
-  Pagination,
-  sortList,
-} from "../Components";
+// import {
+//   Categories,
+//   Sort,
+//   PizzaBlock,
+//   Skeleton,
+//   Pagination,
+// } from '../Components';
 
-// import {sortList} from '../Components/Sort/Sort.jsx'
-// import {Categories} from '../Components'
-// import {PizzaBlock} from '../Components'
-// import {Skeleton} from '../Components'
-// import {Pagination} from '../Components'
-// import {Sort} from '../Components'
+// import { sortList } from "../Components/Sort.jsx"
 
-import { selectFilter } from "../Redux/filter";
+import {sortList} from '../Components/Sort'
+import {Categories} from '../Components/Categories'
+import {PizzaBlock} from '../Components/PizzaBlock'
+import {Skeleton} from '../Components/PizzaBlock/Skeleton'
+import {Pagination} from '../Components/Pagination/index'
+import {Sort} from '../Components/Sort'
+
+import { selectFilter } from "../Redux/filter/selectors.tsx";
 import {
   setCategoryId,
   setCurrentPage,
@@ -78,7 +79,7 @@ const Home = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryId, sort.sortProperty, currentPage, navigate]);
+  }, [categoryId, sort.sortProperty, currentPage]);
 
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
