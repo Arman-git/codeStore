@@ -10,7 +10,10 @@ import { useNavigate } from "react-router-dom";
 //   Skeleton,
 //   Pagination,
 //   sortList
-// } from '../Components';
+// } from "../Components";
+
+
+
 
 // import { sortList } from "../Components/Sort.jsx"
 
@@ -60,7 +63,7 @@ const Home = () => {
 
     axios
       .get(
-        `https://626d16545267c14d5677d9c2.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`
+        `https://650d2478a8b42265ec2bbc08.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       )
       .then((res) => {
         setItems(res.data);
@@ -74,7 +77,7 @@ const Home = () => {
       const queryString = qs.stringify({
         sortProperty: sort.sortProperty,
         categoryId,
-        currentPage,
+        currentPage
       });
 
       navigate(`?${queryString}`);
