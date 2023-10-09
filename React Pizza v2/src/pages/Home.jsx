@@ -47,13 +47,13 @@ const Home = () => {
 
   const onChangeCategory = React.useCallback((idx) => {
     dispatch(setCategoryId(idx));
-  }, []);
+  }, [dispatch]);
 
   const onChangePage = (page) => {
     dispatch(setCurrentPage(page));
   };
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
 
     const sortBy = sort.sortProperty.replace("-", "");
@@ -61,7 +61,7 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : "";
     const search = searchValue ? `search=${searchValue}` : "";
 
-    axios
+    await axios
       .get(
         `https://650d2478a8b42265ec2bbc08.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
       )
@@ -83,7 +83,7 @@ const Home = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
-  }, [categoryId, sort.sortProperty, currentPage]);
+  }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   // Если был первый рендер, то проверяем URl-параметры и сохраняем в редуксе
   React.useEffect(() => {
@@ -103,7 +103,7 @@ const Home = () => {
       );
       isSearch.current = true;
     }
-  }, []);
+  }, [dispatch]);
 
   // Если был первый рендер, то запрашиваем пиццы
   React.useEffect(() => {
@@ -117,7 +117,7 @@ const Home = () => {
       fetchPizzas();
 
       
-    }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+    }, [categoryId, sort.sortProperty, searchValue, currentPage,]);
     
     const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
