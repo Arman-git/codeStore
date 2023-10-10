@@ -108,7 +108,7 @@ const Home = () => {
 
     isSearch.current = false;
     getPizzas();
-  }, []);
+  }, [categoryId, sort.sortProperty, currentPage, navigate]);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
@@ -127,7 +127,7 @@ const Home = () => {
         <div className="content__error-info">
           <h2>Произошла ошибка</h2>
           <p>
-            К сожалниею, не удалось получить пиццу. Попробуйте повторить попытку
+            К сожалниею, не удалось получить пиццы. Попробуйте повторить попытку
             позже.
           </p>
         </div>
