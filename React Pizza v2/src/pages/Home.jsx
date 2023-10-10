@@ -27,7 +27,7 @@ const Home = () => {
   const isMounted = React.useRef(false);
 
   const { categoryId, sort, currentPage } = useSelector(selectFilter);
-  const {items, status} = useSelector((state) => state.pizza);
+  const { items, status } = useSelector((state) => state.pizza);
 
   const { searchValue } = React.useContext(SearchContext);
   // const [items, setItems] = React.useState([]);
@@ -108,7 +108,7 @@ const Home = () => {
 
     isSearch.current = false;
     getPizzas();
-  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+  }, []);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
@@ -123,7 +123,19 @@ const Home = () => {
         <Sort value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
+      {status === "error" ? (
+        <div className="content__error-info">
+          <h2>Произошла ошибка</h2>
+          <p>
+            К сожалниею, не удалось получить пиццу. Попробуйте повторить попытку
+            позже.
+          </p>
+        </div>
+      ) : (
+        <div className="content__items">
+          {status === "loading" ? skeletons : pizzas}
+        </div>
+      )}
 
       <Pagination currentPage={currentPage} onChangePage={onChangePage} />
     </div>
