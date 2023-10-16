@@ -8,10 +8,10 @@ import { Routes, Route } from "react-router-dom";
 import "./scss/app.scss";
 import "./App.css";
 
-export const SearchContext = React.createContext();
+// export const SearchContext = React.createContext();
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState("");
+  // const [searchValue, setSearchValue] = React.useState("");
 
   // const count = useSelector((state) => state.counter.count)
   // const dispatch = useDispatch()
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{searchValue, setSearchValue}}>
+      {/* <SearchContext.Provider value={{searchValue, setSearchValue}}> */}
         <Header />
         <div className="content">
           <div className="container">
@@ -30,7 +30,7 @@ function App() {
             </Routes>
           </div>
         </div>
-      </SearchContext.Provider>
+      {/* </SearchContext.Provider> */}
     </div>
   );
 }

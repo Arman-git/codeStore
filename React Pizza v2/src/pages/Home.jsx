@@ -17,8 +17,8 @@ import {
   setFilters,
 } from "../Redux/slices/filterSlice";
 // import axios from "axios";
-import { SearchContext } from "../App";
-import { fetchPizzas } from "../Redux/slices/pizzaSlice.js";
+// import { SearchContext } from "../App";
+import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice.js";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,10 +26,10 @@ const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categoryId, sort, currentPage } = useSelector(selectFilter);
-  const { items, status } = useSelector((state) => state.pizza);
+  const { categoryId, sort, currentPage, searchValue} = useSelector(selectFilter);
+  const { items, status } = useSelector(selectPizzaData);
 
-  const { searchValue } = React.useContext(SearchContext);
+  // const { searchValue } = React.useContext(SearchContext);
   // const [items, setItems] = React.useState([]);
   // const [isLoading, setIsLoading] = React.useState(true);
 
