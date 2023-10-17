@@ -1,18 +1,39 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const FullPizza = () => {
-    const params = useParams();
-    return (
-      <div className='container'>
-        <img src='' alt=""/>
-        <h2>2222</h2>
-        <p>The Sun is a British broadsheet newspaper, published by the News Group Newspapers division of News UK, itself a wholly owned subsidiary of Rupert Murdoch's News Corp. It was founded as a broadsheet in 1964 as a successor to the Daily Herald, and became a tabloid in 1969 after it was purchased by its current owner.</p>
-        <h4>250 ₽</h4>
-      </div>
-      
-    )
-}
+  const [pizza, setPizza] = React.useState();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-export default FullPizza
+  React.useEffect(() => {
+    async function fetchPizza() {
+      try {
+        const { data } = await axios.get(
+          "https://650d2478a8b42265ec2bbc08.mockapi.io/items/" + id
+        );
+        setPizza(data);
+      } catch (error) {
+        alert("Ошибка при получений запроса!");
+        navigate("/");
+      }
+    }
+    fetchPizza();
+  }, []);
+
+  if (!pizza) {
+    return 'Загрузка....'
+  }
+
+  return (
+    <div className="container">
+      <img src={pizza.imageUrl} alt="" />
+      <h2>{pizza.title}</h2>
+      <h4>{pizza.price} ₽</h4>
+    </div>
+  );
+};
+
+export default FullPizza;

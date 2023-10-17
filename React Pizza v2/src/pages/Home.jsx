@@ -2,6 +2,7 @@ import React from "react";
 import qs from "qs";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { sortList } from "../Components/Sort.jsx";
 import { Categories } from "../Components/Categories";
@@ -26,7 +27,8 @@ const Home = () => {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { categoryId, sort, currentPage, searchValue} = useSelector(selectFilter);
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
   // const { searchValue } = React.useContext(SearchContext);
@@ -108,9 +110,13 @@ const Home = () => {
 
     isSearch.current = false;
     getPizzas();
-  }, [categoryId, sort.sortProperty, currentPage, navigate]);
+  }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items.map((obj) => (
+    <Link key={obj.id} to={`/pizza/${obj.id}`}>
+      <PizzaBlock {...obj} />
+    </Link>
+  ));
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
