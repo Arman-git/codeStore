@@ -22,8 +22,8 @@ const Cart = () => {
   }
 
   return (
-    <div class="cart">
-      <div class="cart__top">
+    <div className="cart">
+      <div className="cart__top">
         <h2 class="content__title">
           <svg
             width="18"
@@ -96,7 +96,7 @@ const Cart = () => {
           <span>Очистить корзину</span>
         </div>
       </div>
-      <div class="content__items">
+      <div className="content__items">
         {items.map((item) => (
           <CartItem key={item.id} {...item} />
         ))}

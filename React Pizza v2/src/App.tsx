@@ -11,15 +11,15 @@ import MainLayout from "./layouts/MainLayout";
 function App() {
   return (
     <div className="container">
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="pizza/:id" element={<FullPizza />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  </div>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="pizza/:id" element={<FullPizza />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

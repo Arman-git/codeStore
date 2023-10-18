@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { sortList } from "../Components/Sort.jsx";
-import { Categories } from "../Components/Categories";
+import { sortList } from "../Components/Sort";
+import Categories from "../Components/Categories";
 import { PizzaBlock } from "../Components/PizzaBlock";
 import { Skeleton } from "../Components/PizzaBlock/Skeleton";
 import { Pagination } from "../Components/Pagination/index";
@@ -17,8 +17,6 @@ import {
   setCurrentPage,
   setFilters,
 } from "../Redux/slices/filterSlice";
-// import axios from "axios";
-// import { SearchContext } from "../App";
 import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice.js";
 
 const Home = () => {
@@ -31,9 +29,6 @@ const Home = () => {
     useSelector(selectFilter);
   const { items, status } = useSelector(selectPizzaData);
 
-  // const { searchValue } = React.useContext(SearchContext);
-  // const [items, setItems] = React.useState([]);
-  // const [isLoading, setIsLoading] = React.useState(true);
 
   const onChangeCategory = React.useCallback(
     (idx) => {
