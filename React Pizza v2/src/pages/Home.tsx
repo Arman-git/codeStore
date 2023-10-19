@@ -11,7 +11,7 @@ import { Skeleton } from "../Components/PizzaBlock/Skeleton";
 import { Pagination } from "../Components/Pagination/index";
 import { Sort } from "../Components/Sort";
 
-import { selectFilter } from "../Redux/filter/selectors.tsx";
+import { selectFilter } from "../Redux/filter/selectors";
 import {
   setCategoryId,
   setCurrentPage,
@@ -19,7 +19,7 @@ import {
 } from "../Redux/slices/filterSlice";
 import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice.js";
 
-const Home = () => {
+const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
@@ -31,13 +31,13 @@ const Home = () => {
 
 
   const onChangeCategory = React.useCallback(
-    (idx) => {
+    (idx: number) => {
       dispatch(setCategoryId(idx));
     },
     [dispatch]
   );
 
-  const onChangePage = (page) => {
+  const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
 
@@ -50,6 +50,7 @@ const Home = () => {
     const search = searchValue ? `search=${searchValue}` : "";
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         sortBy,
         order,
@@ -107,7 +108,7 @@ const Home = () => {
     getPizzas();
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((obj) => (
+  const pizzas = items.map((obj: any) => (
     <Link key={obj.id} to={`/pizza/${obj.id}`}>
       <PizzaBlock {...obj} />
     </Link>
@@ -120,8 +121,11 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort value={sort} />
+        <Categories value={categoryId} 
+        onChangeCategory={onChangeCategory}
+        // getCategories={() => {}}
+        />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (

@@ -4,7 +4,11 @@ import { addItem, selectCartItemById } from "../../Redux/slices/cartSlice"
 
 const typeNames = ["тонкое", "традиционное"];
 
-export const PizzaBlock = ({ title, price, imageUrl, sizes, types, id, rating }) => {
+type PizzaBlockProps = {
+  title: string, price: number, imageUrl: string, sizes: number[], types: number[], id: string, rating: number;
+}
+
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, sizes, types, id }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
@@ -69,7 +73,6 @@ export const PizzaBlock = ({ title, price, imageUrl, sizes, types, id, rating })
               />
             </svg>
             <span>Добавить</span>
-            {/* <i>{count}</i> */}
             { addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
