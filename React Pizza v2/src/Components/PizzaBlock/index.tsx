@@ -1,14 +1,27 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, selectCartItemById } from "../../Redux/slices/cartSlice"
+import { CartItem, addItem, selectCartItemById } from "../../Redux/slices/cartSlice";
 
 const typeNames = ["тонкое", "традиционное"];
 
 type PizzaBlockProps = {
-  title: string, price: number, imageUrl: string, sizes: number[], types: number[], id: string, rating: number;
-}
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  id: string;
+  rating: number;
+};
 
-export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, sizes, types, id }) => {
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+  id,
+}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
@@ -17,16 +30,17 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, 
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,
       imageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 0,
     };
     dispatch(addItem(item));
-  } 
+  };
 
   return (
     <div className="pizza-block-wrapper">
@@ -59,7 +73,10 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, 
         </div>
         <div className="pizza-block__bottom">
           <div className="pizza-block__price">от {price} ₽</div>
-          <button onClick={onClickAdd} className="button button--outline button--add">
+          <button
+            onClick={onClickAdd}
+            className="button button--outline button--add"
+          >
             <svg
               width="12"
               height="12"
@@ -73,12 +90,12 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({ title, price, imageUrl, 
               />
             </svg>
             <span>Добавить</span>
-            { addedCount > 0 && <i>{addedCount}</i>}
+            {addedCount > 0 && <i>{addedCount}</i>}
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;
