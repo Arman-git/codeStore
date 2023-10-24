@@ -40,7 +40,6 @@ const Home: React.FC = () => {
   };
 
   const getPizzas = async () => {
-
     const sortBy = sort.sortProperty.replace("-", "");
     const order = sort.sortProperty.includes("-") ? "asc" : "desc";
     const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -99,9 +98,7 @@ const Home: React.FC = () => {
   //   isMounted.current = true;
   // }, []);
 
-  const pizzas = items.map((obj: any) => (
-      <PizzaBlock {...obj} />
-  ));
+  const pizzas = items.map((obj: any) => <PizzaBlock key={obj.id} {...obj} />);
 
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
@@ -110,11 +107,8 @@ const Home: React.FC = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onChangeCategory={onChangeCategory}
-        />
-        <SortPopUp />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+        <SortPopUp value={sort}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === "error" ? (
