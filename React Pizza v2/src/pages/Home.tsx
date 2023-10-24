@@ -11,15 +11,16 @@ import { Skeleton } from "../Components/PizzaBlock/Skeleton";
 import { Pagination } from "../Components/Pagination/index";
 // import { Sort } from "../Components/Sort";
 
-import { SearchPizzaParams } from "../Redux/slices/pizzaSlice";
+import { SearchPizzaParams } from "../Redux/pizza/asyncActions";
 
 import { selectFilter } from "../Redux/filter/selectors";
 import {
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../Redux/slices/filterSlice";
-import { fetchPizzas, selectPizzaData } from "../Redux/slices/pizzaSlice";
+} from "../Redux/filter/slice";
+import { fetchPizzas } from "../Redux/pizza/asyncActions";
+import { selectPizzaData } from "../Redux/pizza/selectors";
 import { useAppDispatch } from "../Redux/store";
 
 const Home: React.FC = () => {
