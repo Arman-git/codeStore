@@ -1,32 +1,20 @@
 import React from "react";
-// import qs from "qs";
 import { useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 import SortPopUp from "../Components/Sort";
 import Categories from "../Components/Categories";
 import { PizzaBlock } from "../Components/PizzaBlock";
 import { Skeleton } from "../Components/PizzaBlock/Skeleton";
 import { Pagination } from "../Components/Pagination/index";
-// import { Sort } from "../Components/Sort";
-
-// import { SearchPizzaParams } from "../Redux/pizza/types";
 
 import { selectFilter } from "../Redux/filter/selectors";
-import {
-  setCategoryId,
-  setCurrentPage,
-  // setFilters,
-} from "../Redux/filter/slice";
+import { setCategoryId, setCurrentPage } from "../Redux/filter/slice";
 import { fetchPizzas } from "../Redux/pizza/asyncActions";
 import { selectPizzaData } from "../Redux/pizza/selectors";
 import { useAppDispatch } from "../Redux/store";
 
 const Home: React.FC = () => {
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const isMounted = React.useRef(false);
 
   const { items, status } = useSelector(selectPizzaData);
   const { categoryId, sort, currentPage, searchValue } =

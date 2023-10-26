@@ -32,7 +32,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
 
   const addedCount = cartItem ? cartItem.count : 0;
 
-  const onClickAdd = () => {
+const onClickAdd = () => {
     const item: CartItem = {
       id,
       title,
