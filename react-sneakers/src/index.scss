@@ -41,8 +41,6 @@ header {
   margin-right: 30px;
   transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-
-
   &:hover {
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.06);
     transform: translateY(-5px);
@@ -113,11 +111,14 @@ header {
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.01);
   padding: 30px;
 
-  h2 {
-    margin: 0;
-
+  .items {
+    overflow: auto;
+    margin-bottom: 40px;
   }
 
+  h2 {
+    margin: 0;
+  }
 }
 
 .items {
@@ -125,18 +126,59 @@ header {
 }
 
 .cartTotalBlock {
-  li {
-    display: flex;
-    align-items: flex-end;
-    margin-bottom: 20px;
+  ul {
+    margin-bottom: 40px !important;
+
+    li {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 20px;
+    }
+    div {
+      flex: 1;
+      height: 1px;
+      border-bottom: 1px dashed #dfdfdf;
+      position: relative;
+      top: -4px;
+      margin: 0 7px;
+    }
   }
-  div {
-    flex: 1;
-    height: 1px;
-    border-bottom: 1px dashed #dfdfdf;
-    position:  relative;
-    top: -4px;
-    margin: 0 7px;
+  .greenButton {
+    position: relative;
+
+    &:hover {
+      img {
+        transform: translateX(5px);
+      }
+    }
+    
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
+
+.greenButton {
+  width: 100%;
+  height: 55px;
+  background: #9dd558;
+  border-radius: 18px;
+  border: 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background: lighten(#9dd558, 5%);
+  }
+  &:active {
+    background: darken(#9dd558, 5%);
   }
 }
 
@@ -149,7 +191,7 @@ header {
     width: 70px;
     height: 70px;
     background-size: contain;
-    background-position:  0 -3px;
+    background-position: 0 -3px;
     background-repeat: no-repeat;
     margin-right: 20px;
   }
@@ -157,13 +199,12 @@ header {
   p {
     font-size: 16px;
     margin: 0;
-
   }
 
   b {
     font-size: 14px;
   }
-  
+
   .removeBtn {
     opacity: 0.5;
     transition: opacity 0.2s ease-in-out;
@@ -173,6 +214,4 @@ header {
       opacity: 1;
     }
   }
-  
-
 }
