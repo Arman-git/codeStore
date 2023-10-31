@@ -6,22 +6,22 @@ const arr = [
   {
     title: "Мужские Кроссовки Nike Blazer Mid Suede",
     price: 12999,
-    imageUrl: '/img/sneakers/1.jpg'
+    imageUrl: "/img/sneakers/1.jpg",
   },
   {
     title: "Мужские Кроссовки Nike Air Max 270",
     price: 15600,
-    imageUrl: '/img/sneakers/2.jpg'
+    imageUrl: "/img/sneakers/2.jpg",
   },
   {
     title: "Мужские Кроссовки Nike Blazer Mid Suede",
     price: 8499,
-    imageUrl: '/img/sneakers/3.jpg'
+    imageUrl: "/img/sneakers/3.jpg",
   },
   {
     title: "Кроссовки Puma X Aka Boku Future Rider",
     price: 8999,
-    imageUrl: '/img/sneakers/4.jpg'
+    imageUrl: "/img/sneakers/4.jpg",
   },
   // {
   //   title: "Мужские Кроссовки Under Armour Curry 8",
@@ -60,10 +60,11 @@ function App() {
         </div>
         <div className="d-flex">
           {arr.map((obj) => (
-            <Card 
-            title={obj.title} 
-            price={obj.price}
-            imageUrl={obj.imageUrl}
+            <Card
+              title={obj.title}
+              price={obj.price}
+              imageUrl={obj.imageUrl}
+              onClick={() => console.log(obj)}
             />
           ))}
         </div>
