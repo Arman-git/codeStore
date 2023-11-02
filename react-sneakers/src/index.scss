@@ -33,6 +33,34 @@ header {
   }
 }
 
+.carEmpty {
+  text-align: center;
+  flex: 1;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transorm 0.15s ease-in-out;
+    }
+  }
+}
+
 .search-block {
   position: relative;
   border: 1px solid #f3f3f3;
@@ -91,6 +119,7 @@ header {
 }
 
 .cartTotalBlock {
+  
   ul {
     margin-bottom: 40px !important;
 

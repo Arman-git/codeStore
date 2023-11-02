@@ -7,29 +7,38 @@ import Drawer from "./components/Drawer";
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState("");
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
-
-      axios.get('https://654217f9f0b8287df1ff831b.mockapi.io/items').then(res => {
+    axios
+      .get("https://654217f9f0b8287df1ff831b.mockapi.io/items")
+      .then((res) => {
         setItems(res.data);
       });
 
-      axios.get('https://654217f9f0b8287df1ff831b.mockapi.io/cart').then(res => {
+    axios
+      .get("https://654217f9f0b8287df1ff831b.mockapi.io/cart")
+      .then((res) => {
         setCartItems(res.data);
       });
-
   }, []);
 
   const onAddToCart = (obj) => {
-    axios.post('https://654217f9f0b8287df1ff831b.mockapi.io/cart', obj);
+    axios.post("https://654217f9f0b8287df1ff831b.mockapi.io/cart", obj);
     setCartItems((prev) => [...prev, obj]);
   };
 
   const onRemoveItem = (id) => {
-setCartItems((prev) => prev.filter(item => item.id !== id));
-  }
+    axios.delete(`https://654217f9f0b8287df1ff831b.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const onAddToFavorite = (obj) => {
+    axios.post("https://650d2478a8b42265ec2bbc08.mockapi.io/favorites", obj);
+    setFavorites((prev) => [...prev, obj]);
+  };
 
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
@@ -38,7 +47,11 @@ setCartItems((prev) => prev.filter(item => item.id !== id));
   return (
     <div className="wrapper clear">
       {cartOpened && (
-        <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onRemove={onRemoveItem}
+        />
       )}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
@@ -69,14 +82,16 @@ setCartItems((prev) => prev.filter(item => item.id !== id));
         </div>
         <div className="d-flex flex-wrap">
           {items
-            .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+            .filter((item) =>
+              item.title.toLowerCase().includes(searchValue.toLowerCase())
+            )
             .map((item, index) => (
               <Card
                 key={index}
                 title={item.title}
                 price={item.price}
                 imageUrl={item.imageUrl}
-                onFavorite={() => console.log("Добавили в избранное")}
+                onFavorite={(obj) => onAddToFavorite(obj)}
                 onPlus={(obj) => onAddToCart(obj)}
               />
             ))}
