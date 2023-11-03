@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 import Card from "./components/Card";
@@ -53,7 +54,14 @@ function App() {
           onRemove={onRemoveItem}
         />
       )}
-      <Header onClickCart={() => setCartOpened(true)} />
+      {/* <Header onClickCart={() => setCartOpened(true)} /> */}
+
+      <Routes>
+        <Route path="/favorites" element={<Header />}>
+        iiiiiiiiiiiiiiiiiiiiiiiii
+        </Route>
+      </Routes>
+
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
           <h1>
