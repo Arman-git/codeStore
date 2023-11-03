@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 import axios from "axios";
-import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+import Home from "../src/pages/Home";
+import Favorites from "../src/pages/Favorites";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -23,6 +24,11 @@ function App() {
       .get("https://654217f9f0b8287df1ff831b.mockapi.io/cart")
       .then((res) => {
         setCartItems(res.data);
+      });
+    axios
+      .get("https://650d2478a8b42265ec2bbc08.mockapi.io/favorites")
+      .then((res) => {
+        setFavorites(res.data);
       });
   }, []);
 
@@ -54,57 +60,29 @@ function App() {
           onRemove={onRemoveItem}
         />
       )}
-      {/* <Header onClickCart={() => setCartOpened(true)} /> */}
+      <Header onClickCart={() => setCartOpened(true)} />
 
       <Routes>
-        <Route path="/favorites" element={<Header />}>
-        iiiiiiiiiiiiiiiiiiiiiiiii
-        </Route>
-      </Routes>
-
-      <div className="content p-40">
-        <div className="d-flex align-center justify-between mb-40">
-          <h1>
-            {searchValue
-              ? `Поиск по запросу: "${searchValue}"`
-              : "Все кросовки"}
-          </h1>
-          <div className="search-block d-flex">
-            <img src="/img/search.svg" alt="search" />
-            {searchValue && (
-              <img
-                onClick={() => setSearchValue("")}
-                className="clear cu-p"
-                src="/img/btn-remove.svg"
-                alt="clear"
-              />
-            )}
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              type="text"
-              className=""
-              placeholder="Поиск..."
+        <Route
+          path="/"
+          exact
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorite={onAddToFavorite}
+              onAddToCart={onAddToCart}
             />
-          </div>
-        </div>
-        <div className="d-flex flex-wrap">
-          {items
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item, index) => (
-              <Card
-                key={index}
-                title={item.title}
-                price={item.price}
-                imageUrl={item.imageUrl}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-                onPlus={(obj) => onAddToCart(obj)}
-              />
-            ))}
-        </div>
-      </div>
+          }
+        ></Route>
+        <Route
+          path="/Favorites"
+          exact
+          element={<Favorites items={favorites} />}
+        ></Route>
+      </Routes>
     </div>
   );
 }
