@@ -26,11 +26,11 @@ function App() {
         setCartItems(res.data);
       });
     axios
-      .get("https://650d2478a8b42265ec2bbc08.mockapi.io/favorites")
+      .get("https://6547bed2902874dff3acb553.mockapi.io/favorites")
       .then((res) => {
         setFavorites(res.data);
       });
-  }, []);
+    }, []);
 
   const onAddToCart = (obj) => {
     axios.post("https://654217f9f0b8287df1ff831b.mockapi.io/cart", obj);
@@ -43,7 +43,7 @@ function App() {
   };
 
   const onAddToFavorite = (obj) => {
-    axios.post("https://650d2478a8b42265ec2bbc08.mockapi.io/favorites", obj);
+    axios.post("https://6547bed2902874dff3acb553.mockapi.io/favorites", obj);
     setFavorites((prev) => [...prev, obj]);
   };
 
