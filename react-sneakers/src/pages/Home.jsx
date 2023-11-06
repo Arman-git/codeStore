@@ -7,6 +7,7 @@ const Home = ({
   onChangeSearchInput,
   onAddToFavorite,
   onAddToCart,
+  cartItems,
 }) => {
   return (
     <div className="content p-40">
@@ -46,6 +47,10 @@ const Home = ({
               imageUrl={item.imageUrl}
               onFavorite={(obj) => onAddToFavorite(obj)}
               onPlus={(obj) => onAddToCart(obj)}
+              added={cartItems.some(
+                (obj) => Number(obj.id) === Number(item.id)
+              )}
+                loading={false}
             />
           ))}
       </div>
