@@ -1,4 +1,6 @@
 import Card from "../components/Card";
+import React from "react";
+import AppContext from "../context";
 
 const Home = ({
   items,
@@ -10,9 +12,11 @@ const Home = ({
   cartItems,
   isLoading,
 }) => {
+  const { isItemAdded } = React.useContext(AppContext);
+
   const renderItems = () => {
     const filteredItems = items.filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
     );
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
       <Card
@@ -22,7 +26,7 @@ const Home = ({
         // imageUrl={item.imageUrl}
         onFavorite={(obj) => onAddToFavorite(obj)}
         onPlus={(obj) => onAddToCart(obj)}
-        added={cartItems.some((obj) => Number(obj.id) === Number(item.id))}
+        added={isItemAdded(item && item.id)}
         loading={isLoading}
         {...item}
       />
