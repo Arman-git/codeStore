@@ -1,15 +1,17 @@
 import React from "react";
 import Info from "./info";
-import AppContext from "../context";
 import axios from "axios";
+import { useCart } from "../hooks/useCart"
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function Drawer({ onRemove, onClose, items = [] }) {
-  const { cartItems, setCartItems } = React.useContext(AppContext);
+  // const { cartItems, setCartItems } = React.useContext(AppContext);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [orderId, setOrderId] = React.useState(null);
+  const { cartItems, setCartItems, totalPrice } = useCart()
+  // const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
 
   const onClickOrder = async () => {
     try {
@@ -79,12 +81,12 @@ function Drawer({ onRemove, onClose, items = [] }) {
                 <li className="d-flex">
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 498 руб.</b>
+                  <b>{totalPrice} руб.</b>
                 </li>
                 <li className="d-flex">
                   <span>Налог 5%: </span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{(totalPrice / 100) * 5} руб.</b>
                 </li>
               </ul>
               <button
