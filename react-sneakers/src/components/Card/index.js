@@ -4,6 +4,7 @@ import ContentLoader from "react-content-loader";
 
 function Card({
   id,
+  parentId,
   onFavorite,
   title,
   imageUrl,
@@ -14,14 +15,15 @@ function Card({
 }) {
   const [isAdded, setIsAdded] = React.useState(added);
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const obj = {id, parentId: id, title, imageUrl, price };
 
   const onClickPlus = () => {
-    onPlus({ id, title, imageUrl, price });
+    onPlus(obj);
     setIsAdded(!isAdded);
   };
 
   const onClickFavorite = () => {
-    onFavorite(title, imageUrl, price);
+    onFavorite(obj);
     setIsFavorite(!isFavorite);
   };
 
