@@ -21,9 +21,6 @@ const Home = ({
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
       <Card
         key={index}
-        // title={item.title}
-        // price={item.price}
-        // imageUrl={item.imageUrl}
         onFavorite={(obj) => onAddToFavorite(obj)}
         onPlus={(obj) => onAddToCart(obj)}
         added={isItemAdded(item && item.id)}
@@ -40,12 +37,12 @@ const Home = ({
           {searchValue ? `Поиск по запросу: "${searchValue}"` : "Все кросовки"}
         </h1>
         <div className="search-block d-flex">
-          <img src="/img/search.svg" alt="search" />
+          <img src="img/search.svg" alt="search" />
           {searchValue && (
             <img
               onClick={() => setSearchValue("")}
               className="clear cu-p"
-              src="/img/btn-remove.svg"
+              src="img/btn-remove.svg"
               alt="clear"
             />
           )}
