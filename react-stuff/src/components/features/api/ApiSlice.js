@@ -13,4 +13,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetProductquery } = apiSlice;
+export const { useGetProductQuery } = apiSlice;

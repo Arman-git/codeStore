@@ -7,7 +7,6 @@ import { ROUTES } from "../../utils/routes";
 const SIZES = [4, 4.5, 5];
 
 const Product = ({ images, title, price, description }) => {
-  //   const currentImage = images[0];
   const [currentImage, setCurrentImage] = useState();
   const [currentSize, setCurrentSize] = useState();
   useEffect(() => {
