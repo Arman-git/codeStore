@@ -27,7 +27,7 @@ const Product = ({ images, title, price, description }) => {
               key={i}
               className={styles.image}
               style={{ backgroundImage: `url(${image})` }}
-              onClick={() => setCurrentImage(images)}
+              onClick={() => setCurrentImage(image)}
             />
           ))}
         </div>

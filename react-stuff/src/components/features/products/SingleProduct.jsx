@@ -16,6 +16,7 @@ const SingleProduct = () => {
       navigate(ROUTES.HOME);
     }
   }, [isLoading, isFetching, isSuccess]);
+  
 
   return !data ? (
     <section className="preloader">Loading...</section>
