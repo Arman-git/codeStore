@@ -10,10 +10,10 @@ export const Home = () => {
   const dispatch = useDispatch();
   const { products: {list, filtered}, categories } = useSelector((state) => state);
   useEffect(() => {
-      if (!list.lenght) return;
+      if (!list.length) return;
 
       dispatch(filterByPrice(100))
-  }, [dispatch, list.lenght])
+  }, [dispatch, list.length])
 
   return (
     <>
