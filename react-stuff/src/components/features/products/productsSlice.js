@@ -21,17 +21,17 @@ const productsSlice = createSlice({
   initialState: {
     list: [],
     filtered: [],
-    // related:[],
+    related:[],
     isLoading: false,
   },
   reducers: {
     filterByPrice: (state, { payload }) => {
       state.filtered = state.list.filter(({ price }) => price < payload);
     },
-    // getRelatedProducts: (state, { payload }) => {
-    //   state.related = state.list.filter(({ price }) => price === payload);
-    //   state.related = shuffle(list);
-    // },
+    getRelatedProducts: (state, { payload }) => {
+      state.related = state.list.filter(({ price }) => price === payload);
+      state.related = shuffle(list);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state) => {
