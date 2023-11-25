@@ -35,7 +35,9 @@ const userSlice = createSlice({
             ? { ...item, quantity: payload.quantity || item.quantity + 1 }
             : item;
         });
-      }
+      } else newCart.push({ payload, quantity: 1 });
+
+      state.cart = newCart;
     },
   },
   extraReducers: (builder) => {
@@ -51,5 +53,6 @@ const userSlice = createSlice({
     // });
   },
 });
+export const { addItemToCart } = userSlice.actions;
 
 export default userSlice.reducer;
