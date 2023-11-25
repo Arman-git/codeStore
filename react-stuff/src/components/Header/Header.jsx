@@ -36,7 +36,7 @@ const Header = () => {
               type="search"
               name="search"
               placeholder="Search for anything..."
-              autocomplete="off"
+              autoComplete="off"
               onChange={() => {}}
               value=""
             />
