@@ -5,14 +5,16 @@ import { useGetProductQuery } from "../features/api/apiSlice";
 import { ROUTES } from "../../utils/routes";
 import Product from "./Product";
 import Products from "./Products";
+import { useDispatch, useSelector } from "react-redux";
+import { getRelatedProducts } from "../features/products/productsSlice";
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+  const { related } = useSelector(({ products }) => products);
 
   const { data, isLoading, isFetching, isSuccess } = useGetProductQuery({ id });
-
-  console.log(data);
 
   useEffect(() => {
     if (!isFetching && !isLoading && !isSuccess) {
@@ -20,12 +22,18 @@ const SingleProduct = () => {
     }
   }, [isLoading, isFetching, isSuccess]);
 
+  useEffect(() => {
+    if (data) {
+      dispatch(getRelatedProducts(data.category.id));
+    }
+  }, [data, dispatch]);
+
   return !data ? (
     <section className="preloader">Не загрузился...</section>
   ) : (
     <>
       <Product {...data} />
-      <Products products={} amount={5} title='Related' />
+      <Products products={related} amount={10} title="Related products" />
     </>
   );
 };
