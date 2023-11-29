@@ -9,6 +9,11 @@ const UserSignupForm = () => {
     password: "",
     avatar: "",
   });
+
+  const handleChange = ({ target: { value, name } }) => {
+    setValues({ ...values, [name]: value });
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.close}>
@@ -22,10 +27,10 @@ const UserSignupForm = () => {
           <input
             type="email"
             name="email"
-            value=""
+            value={values.email}
             autoComplete="off"
             placeholder="Your email"
-            onChange={() => {}}
+            onChange={handleChange}
             required
           />
         </div>
@@ -34,10 +39,10 @@ const UserSignupForm = () => {
           <input
             type="name"
             name="name"
-            value=""
+            value={values.name}
             autoComplete="off"
             placeholder="Your name"
-            onChange={() => {}}
+            onChange={handleChange}
             required
           />
         </div>
@@ -46,10 +51,10 @@ const UserSignupForm = () => {
           <input
             type="password"
             name="password"
-            value=""
+            value={values.password}
             autoComplete="off"
             placeholder="Your password"
-            onChange={() => {}}
+            onChange={handleChange}
             required
           />
         </div>
@@ -58,10 +63,10 @@ const UserSignupForm = () => {
           <input
             type="avatar"
             name="avatar"
-            value=""
+            value={values.avatar}
             autoComplete="off"
             placeholder="Your avatar"
-            onChange={() => {}}
+            onChange={handleChange}
             required
           />
         </div>
