@@ -20,7 +20,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     // list: [],
-    currenUser: null,
+    currentUser: null,
     cart: [],
     isLoading: false,
     formType: "signup",
