@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../features/user/userSlice";
 
-const UserSignupForm = ({ closeForm }) => {
+const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
   const dispatch = useDispatch();
   const [values, setValues] = useState({
     name: "",
@@ -20,7 +20,7 @@ const UserSignupForm = ({ closeForm }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isNotEmpty = Object.values(values).some((val) => !val);
+    const isNotEmpty = Object.values(values).every((val) => !val);
 
     if (isNotEmpty) return;
 
@@ -85,7 +85,12 @@ const UserSignupForm = ({ closeForm }) => {
           />
         </div>
 
-        <div className={styles.link}>I already have an account</div>
+        <div
+          className={styles.link}
+          onClick={() => toggleCurrentFormType("login")}
+        >
+          I already have an account
+        </div>
         <button type="submit" className={styles.submit}>
           Create an account
         </button>
