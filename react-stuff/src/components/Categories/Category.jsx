@@ -10,7 +10,7 @@ const Category = () => {
   const { id } = useParams();
   const { list } = useSelector(({ categories }) => categories);
 
-  const defaulValues = {
+  const defaultValues = {
     title: "",
     price_min: 0,
     price_max: 0,
@@ -19,13 +19,13 @@ const Category = () => {
     categoryId: id,
     limit: 5,
     offset: 0,
-    ...defaulValues,
+    ...defaultValues,
   };
 
   const [isEnd, setEnd] = useState(false);
   const [cat, setCat] = useState("");
   const [items, setItems] = useState([]);
-  const [values, setValues] = useState(defaulValues);
+  const [values, setValues] = useState(defaultValues);
   const [params, setParams] = useState(defaultParams);
 
   const { data, isLoading, isSuccess } = useGetProductsQuery(params);
@@ -33,7 +33,7 @@ const Category = () => {
   useEffect(() => {
     if (!id) return;
 
-    setValues(defaulValues);
+    setValues(defaultValues);
     setItems([]);
     setEnd(false);
     setParams({ ...defaultParams, categoryId: id });
@@ -65,6 +65,12 @@ const Category = () => {
     setItems([]);
     setEnd(false);
     setParams({ ...defaultParams, ...values });
+  };
+
+  const handleReset = () => {
+    setValues(defaultValues);
+    setParams(defaultParams);
+    setEnd(false);
   };
 
   return (
@@ -112,7 +118,7 @@ const Category = () => {
       ) : !isSuccess || !items.length ? (
         <div className={styles.back}>
           <span>No result</span>
-          <button>Reset</button>
+          <button onClick={handleReset}>Reset</button>
         </div>
       ) : (
         <Products
