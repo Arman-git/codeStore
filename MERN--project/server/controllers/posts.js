@@ -6,13 +6,13 @@ import { fileURLToPath } from "url";
 //Create Post
 export const createPost = async (req, res) => {
   try {
-    const { text, title } = req.body;
-    const user = await User.findById(req.User.id);
+    const { title, text } = req.body;
+    const user = await User.findById(req.userId);
 
     if (req.files) {
       let fileName = Date.now().toString() + req.files.image.name;
-      const _dirname = dirname(fileURLToPath(import.meta.url));
-      require.files.image.mv(path.join(__dirname, "..", "uploads", fileName));
+      const __dirname = dirname(fileURLToPath(import.meta.url));
+      req.files.image.mv(path.join(__dirname, "..", "uploads", fileName));
 
       const newPostWithImage = new Post({
         username: user.username,
@@ -33,7 +33,7 @@ export const createPost = async (req, res) => {
       username: user.username,
       title,
       text,
-      imgUrl: "posts.js",
+      imgUrl: "",
       author: req.userId,
     });
 

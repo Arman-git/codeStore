@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, NavLink } from "react-router-dom";
-import { checkIsAuth, logout } from "../redux/features/auth/authSlice";
+import { checkIsAuth, logout } from "../redux/features/auth/authSlice.js";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
@@ -22,14 +22,14 @@ const Navbar = () => {
   return (
     <div className="flex py-4 justify-between items-center">
       <span className="flex justify-center items-center w-6 h-6 bg-gray-600 text-xs text-white rounded-sm">
-        С
+        E
       </span>
 
       {isAuth && (
         <ul className="flex gap-8">
           <li>
             <NavLink
-              to="/"
+              to={"/"}
               href="/"
               className="text-xs text-gray-400 hover:text-white"
               style={({ isActive }) => (isActive ? activeStyles : undefined)}
@@ -52,7 +52,7 @@ const Navbar = () => {
               to="/new"
               href="/"
               className="text-xs text-gray-400 hover:text-white"
-              style={({ isActive }) => isActive ? activeStyles : undefined}
+              style={({ isActive }) => (isActive ? activeStyles : undefined)}
             >
               Добавить пост
             </NavLink>

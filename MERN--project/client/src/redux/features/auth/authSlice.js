@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "../../../utils/axios";
+import axios from "../../../utils/axios.js";
 
 const initialState = {
   user: null,
@@ -48,12 +48,12 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getMe = createAsyncThunk("auth/me", async () => {
+export const getMe = createAsyncThunk("auth/getme", async () => {
   try {
     const { data } = await axios.get("/auth/me");
-    return data
+    return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     // You may want to throw the error again to be caught by the rejectWithValue handler
     throw error;
   }
@@ -94,6 +94,7 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.status = null;
+        
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -106,9 +107,9 @@ export const authSlice = createSlice({
           ? action.payload.message
           : "Rejected without payload";
         state.isLoading = false;
-      })
-      //Get Me Проверка авторизаций
-      builder
+      });
+    //Get Me Проверка авторизаций
+    builder
       .addCase(getMe.pending, (state) => {
         state.isLoading = true;
         state.status = null;
@@ -126,7 +127,6 @@ export const authSlice = createSlice({
         state.isLoading = true;
       });
   },
-
 });
 
 export const checkIsAuth = (state) => Boolean(state.auth.token);

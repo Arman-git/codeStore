@@ -34,8 +34,8 @@ export const register = async (req, res) => {
     await newUser.save();
 
     res.json({
-      token,
       newUser,
+      token,
       message: "Регистрация прошла успешно!",
     });
   } catch (error) {

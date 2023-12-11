@@ -2,7 +2,7 @@ import Layout from "./components/Layout";
 import MainPage from "./pages/MainPage";
 import PostsPage from "./pages/PostsPage";
 import PostPage from "./pages/PostPage";
-import AddPostPage from "./pages/AddPostPage";
+import AddPostPage from "./pages/AddPostPage.jsx";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import EditPostPage from "./pages/EditPostPage";
