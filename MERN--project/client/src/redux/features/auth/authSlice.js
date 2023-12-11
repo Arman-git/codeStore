@@ -48,12 +48,12 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getMe = createAsyncThunk("auth/getMe", async () => {
+export const getMe = createAsyncThunk("auth/me", async () => {
   try {
     const { data } = await axios.get("/auth/me");
-    return data;
+    return data
   } catch (error) {
-    console.log(error);
+    console.log(error)
     // You may want to throw the error again to be caught by the rejectWithValue handler
     throw error;
   }
@@ -123,7 +123,7 @@ export const authSlice = createSlice({
         state.status = action.payload
           ? action.payload.message
           : "Rejected without payload";
-        state.isLoading = false;
+        state.isLoading = true;
       });
   },
 
