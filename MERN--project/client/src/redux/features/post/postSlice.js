@@ -19,11 +19,21 @@ export const createPost = createAsyncThunk(
   }
 );
 
+export const getAllPosts = createAsyncThunk("post/getAllPosts", async () => {
+  try {
+    const { data } = await axios.get("/posts");
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export const postSlice = createSlice({
   name: "post",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    //Создание поста
     builder
       .addCase(createPost.pending, (state) => {
         state.loading = true;
@@ -33,6 +43,21 @@ export const postSlice = createSlice({
         state.posts.push(action.payload);
       })
       .addCase(createPost.rejected, (state) => {
+        state.loading = false;
+      });
+
+    //Получение всех постов
+    builder
+      .addCase(getAllPosts.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        // state.posts.push(action.payload);
+        state.posts = action.payload.posts;
+        state.popularPosts = action.payload.popularPosts;
+      })
+      .addCase(getAllPosts.rejected, (state) => {
         state.loading = false;
       });
   },
