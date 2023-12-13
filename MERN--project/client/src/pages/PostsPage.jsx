@@ -9,6 +9,7 @@ const PostsPage = () => {
     try {
       const { data } = await axios.get("/posts/user/me");
       setPosts(data);
+      // console.log(posts);
     } catch (error) {
       console.log(error);
     }

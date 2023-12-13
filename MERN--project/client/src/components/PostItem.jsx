@@ -2,21 +2,19 @@ import React from "react";
 import { AiFillEye, AiOutlineMessage } from "react-icons/ai";
 
 import Moment from "react-moment";
-import "moment-timezone";
+// import "moment-timezone";
 import { Link } from "react-router-dom";
 
 const PostItem = ({ post }) => {
   if (!post) {
     return (
-      <div className="text-xl text-center text-white py-10">
-       Загрузка...
-      </div>
+      <div className="text-xl text-center text-white py-10">Загрузка...</div>
     );
   }
 
   return (
     <Link to={`/${post._id}`}>
-      <div clasName="flex flex-col basis-1/4 flex-grow">
+      <div className="flex flex-col basis-1/4 flex-grow">
         <div
           className={post.imgUrl ? "flex rounded-sm h-80" : "flex rounded-sm"}
         >

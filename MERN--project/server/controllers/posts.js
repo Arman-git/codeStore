@@ -63,7 +63,7 @@ export const getAll = async (req, res) => {
   }
 };
 
-//Get all posts
+//Get post by id
 export const getById = async (req, res) => {
   try {
     const post = await Post.findByIdAndUpdate(req.params.id, {
@@ -78,13 +78,29 @@ export const getById = async (req, res) => {
 //Get all posts
 export const getMyPosts = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.userId);
+    const user = await User.findById(req.userId);
     const list = await Promise.all(
       user.posts.map((post) => {
-        return Post.findById(post.id);
+        return Post.findById(post._id);
       })
     );
     res.json(list);
+  } catch (error) {
+    res.json({ message: "Что-то пошло не так!" });
+  }
+};
+
+//Remove post
+export const removePost = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndDelete(req.params.id);
+    if (!post) return res.json({ message: "Такого поста не существует!" });
+
+    await User.findByIdAndUpdate(req.userId, {
+      $pull: { posts: req.params.id },
+    });
+
+    res.json({ message: "Пост был удален!" });
   } catch (error) {
     res.json({ message: "Что-то пошло не так!" });
   }
