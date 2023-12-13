@@ -3,7 +3,7 @@ import { AiFillEye, AiOutlineMessage } from "react-icons/ai";
 
 import Moment from "react-moment";
 import "moment-timezone";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import axios from "../utils/axios.js";
 
@@ -23,7 +23,7 @@ const PostPage = () => {
   if (!post) {
     return (
       <div className="text-xl text-center text-white py-10">
-        Постов не существует
+        Загрузка...
       </div>
     );
   }
@@ -31,7 +31,9 @@ const PostPage = () => {
   return (
     <div>
       <button className="flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm px-4">
-        Назад
+        <Link className="flex" to={"/"}>
+          Назад
+        </Link>
       </button>
 
       <div className="flex gap-10 py-8">
