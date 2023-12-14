@@ -21,7 +21,7 @@ const PostPage = () => {
   const { user } = useSelector((state) => state.auth);
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const removePostHandler = () => {
     try {
@@ -95,7 +95,9 @@ const PostPage = () => {
               {user?._id === post.author && (
                 <div className="flex gap-3 mt-4">
                   <button className="flex items-center justify-center gap-2 text-white opacity-50">
-                    <AiTwotoneEdit />
+                    <Link to={`/${params.id}/edit`}>
+                      <AiTwotoneEdit />
+                    </Link>
                   </button>
                   <button
                     onClick={removePostHandler}

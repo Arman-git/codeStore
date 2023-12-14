@@ -1,7 +1,9 @@
+import { title } from "process";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import { text } from "express";
 
 //Create Post
 export const createPost = async (req, res) => {
@@ -105,3 +107,28 @@ export const removePost = async (req, res) => {
     res.json({ message: "Что-то пошло не так!" });
   }
 };
+
+//Update post
+export const updatePost = async (req, res) => {
+  try {
+    const { title, text, id } = req.body;
+    const post = await Post.findById(id);
+
+    if (req.files) {
+      let fileName = Date.now().toString() + req.files.image.name;
+      const _dirname = dirname(fileURLToPath(import.meta.url));
+      req.files.image.mv(path.join(_dirname, "..", "uploads", fileName));
+      post.imgUrl = fileName || "";
+    }
+
+    post.title = title;
+    post.text = text;
+
+    await post.save();
+
+    res.json(post);
+  } catch (error) {
+    res.json({ message: "Что-то пошло не так!" });
+  }
+};
+
