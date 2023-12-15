@@ -1,9 +1,10 @@
-import { title } from "process";
+// import { title } from "process";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import Comment from "../models/Comment.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { text } from "express";
+// import { text } from "express";
 
 //Create Post
 export const createPost = async (req, res) => {
@@ -132,3 +133,17 @@ export const updatePost = async (req, res) => {
   }
 };
 
+//Get Post Comment
+export const getPostComments = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const list = await Promise.all(
+      post.comments.map((comment) => {
+        return Comment.findById(comment);
+      })
+    );
+    res.json(list);
+  } catch (error) {
+    res.json({ message: "Что-топошло не так!" });
+  }
+};
