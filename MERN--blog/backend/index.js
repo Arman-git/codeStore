@@ -1,4 +1,6 @@
 import express from "express";
+import multer from "multer";
+
 import mongoose from "mongoose";
 
 import {
@@ -7,10 +9,9 @@ import {
   postCreateValidation,
 } from "./validations.js";
 
-import CheckAuth from "./utils/CheckAuth.js";
+import { handleValidationErrors, CheckAuth } from "./utils/index.js";
 
-import * as UserController from "./controllers/UserController.js";
-import * as PostController from "./controllers/PostController.js";
+import { PostController, UserController } from "./controllers/index.js";
 
 mongoose
   .connect(
@@ -21,19 +22,58 @@ mongoose
 
 const app = express();
 
+const storage = multer.diskStorage({
+  destination: (_, __, cd) => {
+    cd(null, "upload");
+  },
+  filename: (_, file, cd) => {
+    cd(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
 app.use(express.json());
 
-app.post("/auth/login", loginValidation, UserController.login);
+app.use("/upload", express.static("upload"));
 
-app.post("/auth/register", registerValidation, UserController.register);
-
+app.post(
+  "/auth/login",
+  loginValidation,
+  handleValidationErrors,
+  UserController.login
+);
+app.post(
+  "/auth/register",
+  registerValidation,
+  handleValidationErrors,
+  UserController.register
+);
 app.get("/auth/me", CheckAuth, UserController.getMe);
+
+app.post("/upload", CheckAuth, upload.single("image"), (req, res) => {
+  res.json({
+    url: `/upload/${req.file.originalname}`,
+  });
+});
 
 app.get("/posts", PostController.getAll);
 app.get("/posts/:id", PostController.getOne);
-app.post("/posts", CheckAuth, postCreateValidation, PostController.create);
+app.post(
+  "/posts",
+  CheckAuth,
+  postCreateValidation,
+  handleValidationErrors,
+  PostController.create
+);
 app.delete("/posts/:id", CheckAuth, PostController.remove);
-// app.patch("/posts", CheckAuth, PostController.update);
+app.patch(
+  "/posts/:id",
+  CheckAuth,
+  postCreateValidation,
+  handleValidationErrors,
+  PostController.update
+);
 
 app.listen(4444, (err) => {
   if (err) {
