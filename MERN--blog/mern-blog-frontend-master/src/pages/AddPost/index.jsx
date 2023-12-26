@@ -9,11 +9,10 @@ import styles from "./AddPost.module.scss";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
-import axios from "../../axios";
+import axios from "../../axios.js";
 
 export const AddPost = () => {
   const navigate = useNavigate();
-  // const imageUrl = "";
   const isAuth = useSelector(selectIsAuth);
   const [isLoading, setLoading] = React.useState(false);
   const [text, setText] = React.useState("");
@@ -52,10 +51,13 @@ export const AddPost = () => {
         imageUrl,
         tags,
         text,
+      
       };
 
       const { data } = await axios.post("/posts", fields);
       const id = data._id;
+
+      console.log(id)
 
       navigate(`/posts/${id}`);
     } catch (error) {
@@ -82,6 +84,7 @@ export const AddPost = () => {
   if (!window.localStorage.getItem("token") && !isAuth) {
     return <Navigate to="/" />;
   }
+
 
   return (
     <Paper style={{ padding: 30 }}>
@@ -139,7 +142,7 @@ export const AddPost = () => {
         options={options}
       />
       <div className={styles.buttons}>
-        <Button onClick={onSubmit} size="large" variant="contained">
+        <Button onClick={onSubmit}  size="large" variant="contained">
           Опубликовать
         </Button>
         <a href="/">
