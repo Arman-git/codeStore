@@ -113,7 +113,7 @@ export const update = async (req, res) => {
         text: req.body.text,
         imageUrl: req.body.imageUrl,
         users: req.userId,
-        tags: req.body.tags,
+        tags: req.body.tags.split(","),
       }
     );
 
