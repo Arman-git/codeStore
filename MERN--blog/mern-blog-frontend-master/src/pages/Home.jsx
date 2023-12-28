@@ -40,7 +40,9 @@ export const Home = () => {
               <Post
                 id={obj._id}
                 title={obj.title}
-                imageUrl={obj.imageUrl}
+                imageUrl={
+                  obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
+                }
                 user={obj.user}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}
@@ -58,7 +60,7 @@ export const Home = () => {
               {
                 user: {
                   fullName: "Вася Пупкин",
-                  avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
+                  avatarUrl: "https://mui.com/Вас/images/avatar/1.jpg",
                 },
                 text: "Это тестовый комментарий",
               },

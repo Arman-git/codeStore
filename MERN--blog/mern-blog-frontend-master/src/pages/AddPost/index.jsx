@@ -50,14 +50,18 @@ export const AddPost = () => {
         title,
         imageUrl,
         tags,
+        // tags: tags.split(","),
         text,
-      
       };
 
+      console.log(fields);
+
       const { data } = await axios.post("/posts", fields);
+
+      console.log(data);
       const id = data._id;
 
-      console.log(id)
+      console.log(id);
 
       navigate(`/posts/${id}`);
     } catch (error) {
@@ -69,7 +73,7 @@ export const AddPost = () => {
   const options = React.useMemo(
     () => ({
       spellChecker: false,
-      maxHeight: "400px",
+      maxHeight: "50px",
       autofocus: true,
       placeholder: "Введите текст...",
       status: false,
@@ -84,7 +88,6 @@ export const AddPost = () => {
   if (!window.localStorage.getItem("token") && !isAuth) {
     return <Navigate to="/" />;
   }
-
 
   return (
     <Paper style={{ padding: 30 }}>
@@ -142,7 +145,7 @@ export const AddPost = () => {
         options={options}
       />
       <div className={styles.buttons}>
-        <Button onClick={onSubmit}  size="large" variant="contained">
+        <Button onClick={onSubmit} size="large" variant="contained">
           Опубликовать
         </Button>
         <a href="/">

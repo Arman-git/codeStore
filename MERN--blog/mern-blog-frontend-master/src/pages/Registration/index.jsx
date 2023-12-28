@@ -50,7 +50,10 @@ export const Registration = () => {
         Создание аккаунта
       </Typography>
       <div className={styles.avatar}>
-        <Avatar sx={{ width: 100, height: 100 }} />
+        <Avatar
+          sx={{ width: 100, height: 100 }}
+          src="https://gravatar.com/avatar/51ff7c002982eca9cfb9c4c0f519bab3?s=400&d=robohash&r=x"
+        />
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField

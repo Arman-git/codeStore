@@ -39,7 +39,10 @@ export const getOne = async (req, res) => {
       { _id: postId },
       { $inc: { viewsCount: 1 } },
       { new: true }
-    ).exec();
+    )
+
+      .populate("user")
+      .exec();
 
     if (!updatedPost) {
       return res.status(404).json({
@@ -58,18 +61,19 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const doc = PostModel({
+    const doc = new PostModel({
       title: req.body.title,
       text: req.body.text,
       imageUrl: req.body.imageUrl,
-      tags: req.body.tags,
+      tags: req.body.tags.split(","),
       user: req.userId,
     });
 
     const post = await doc.save();
+
     res.json(post);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Не удалось создать статью!",
     });
