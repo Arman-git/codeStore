@@ -2,98 +2,114 @@ const { prisma } = require("../prisma/prisma-client");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-/*
-@route POST /api/user/login
-@desc Login
-@access public
-*/
+/**
+ *@route POST /api/user/login
+ *@desc Login
+ *@access public
+ */
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ message: "Пожалйста, заполните обязательное поле!" });
-  }
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Пожалйста, заполните обязательное поле!" });
+    }
 
-  const user = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-  });
-
-  const isPasswordCorrect =
-    user && (await bcrypt.compare(password, user.password));
-
-  if (user && isPasswordCorrect) {
-    res.status(200).json({
-      id: user.id,
-      email: user.email,
-      name: user.name,
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+      },
     });
-  } else {
-    return res
-      .status(400)
-      .json({ message: "Неверно введен логин или пароль!" });
+
+    const isPasswordCorrect =
+      user && (await bcrypt.compare(password, user.password));
+    const secret = process.env.JWT_SECRET;
+
+    if (user && isPasswordCorrect && secret) {
+      res.status(200).json({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: "30d" }),
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ message: "Неверно введен логин или пароль!" });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: "Что-то пошло не так!" });
   }
 };
 
-/*
-@route POST /api/user/register
-@desc register
-@access public
-*/
-
+/**
+ *@route POST /api/user/register
+ *@desc register
+ *@access public
+ */
+//12345 пароль - хеш $2b$10$10bXgLBN.A6Vg9iQ6hELje8xs3368T.sLRX1ccPJMCiXJEWcTICty
 const register = async (req, res) => {
-  const { email, password, name } = req.body;
-
-  if (!email || !password || !name) {
-    return res
-      .status(400)
-      .json({ message: "Пожалуйста, заполните обязательные поля!" });
-  }
-  const registeredUser = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-  });
-
-  if (registeredUser) {
-    return res
-      .status(400)
-      .json({ message: "Пользователь с таким email  уже существует!" });
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const user = await prisma.user.create({
-    data: {
-      email,
-      name,
-      password: hashedPassword,
-    },
-  });
-
-  const secret = process.env.JWT_SECRET;
-
-  if (user && secret) {
-    res.status(201).json({
-      id: user.id,
-      email: user.email,
-      name,
-      token: jwt.sign({ id: user.id }, secret, { expiresIn: "30d" }),
+  
+  try {
+    const { email, password, name } = req.body;
+    if (!email || !password || !name) {
+      return res
+        .status(400)
+        .json({ message: "Пожалуйста, заполните обязательные поля!" });
+    }
+    const registeredUser = await prisma.user.findFirst({
+      where: {
+        email,
+      },
     });
-  } else {
-    return res
-      .status(400)
-      .json({ message: "Не удалось создать пользователя!" });
+
+    if (registeredUser) {
+      return res
+        .status(400)
+        .json({ message: "Пользователь с таким email  уже существует!" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        password: hashedPassword,
+      },
+    });
+
+    const secret = process.env.JWT_SECRET;
+
+    if (user && secret) {
+      res.status(201).json({
+        id: user.id,
+        email: user.email,
+        name,
+        token: jwt.sign({ id: user.id }, secret, { expiresIn: "30d" }),
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ message: "Не удалось создать пользователя!" });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: "Что-то пошло не так!" });
   }
 };
+
+/**
+ *@route GET /api/user/current
+ *@desc Текущий пользователь
+ *@access Privat
+ */
 
 const current = async (req, res) => {
-  res.send("current");
+  return res.status(200).json(req.user);
 };
 
 module.exports = {
