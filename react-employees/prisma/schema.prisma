@@ -25,4 +25,5 @@ model Employee {
   address      String
   user User @relation(fields: [userId], references: [id])
   userId String
+  age  String
 }
