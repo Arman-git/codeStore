@@ -4,7 +4,7 @@ import { Layout, Space, Typography } from "antd";
 import { LoginOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import { CustomButton } from "../custom-button";
 import { Link } from "react-router-dom";
-import { Paths } from "../../app/paths";
+import { Paths } from "../../paths";
 
 export const Header = () => {
   return (

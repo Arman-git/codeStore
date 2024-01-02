@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import { Layout } from "../../components/layout";
 import { Card, Form, Row, Space, Typography } from "antd";
 import { CustomInput } from "../../components/custom-input";
 import { PasswordInput } from "../../components/password-input/input";
 import { CustomButton } from "../../components/custom-button";
 import { Link } from "react-router-dom";
-import { Paths } from "../../app/paths";
+import { Paths } from "../../paths";
 
 export const Register = () => {
   return (
@@ -16,7 +16,10 @@ export const Register = () => {
             <CustomInput name="name" placeholder="имя" />
             <CustomInput type="email" name="email" placeholder="placeholder" />
             <PasswordInput name="password" placeholder="Пароль" />
-            <PasswordInput name="confirmPassword" placeholder="Повторите пароль" />
+            <PasswordInput
+              name="confirmPassword"
+              placeholder="Повторите пароль"
+            />
             <CustomButton type="primary" htmlType="submit">
               Войти
             </CustomButton>
@@ -29,5 +32,5 @@ export const Register = () => {
         </Card>
       </Row>
     </Layout>
-  )
-}
+  );
+};

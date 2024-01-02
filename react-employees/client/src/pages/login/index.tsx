@@ -5,14 +5,19 @@ import { CustomInput } from "../../components/custom-input";
 import { PasswordInput } from "../../components/password-input/input";
 import { CustomButton } from "../../components/custom-button";
 import { Link } from "react-router-dom";
-import { Paths } from "../../app/paths";
+import { Paths } from "../../paths";
+import { UserData } from "../../app/services/auth";
 
 export const Login = () => {
+
+  const login = async (data: UserData) => {
+
+  }
   return (
     <Layout>
       <Row align="middle" justify="center">
         <Card title="Войдите" style={{ width: "30rem" }}>
-          <Form onFinish={() => null}>
+          <Form onFinish={login}>
             <CustomInput type="email" name="email" placeholder="placeholder" />
             <PasswordInput name="password" placeholder="Пароль" />
             <CustomButton type="primary" htmlType="submit">
