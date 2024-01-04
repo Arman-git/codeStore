@@ -37,6 +37,7 @@ export const PasswordInput = ({ name, placeholder, dependencies }: Props) => {
                   new Error("Пароль должен быть не меньше шести символов!")
                 );
               }
+              return Promise.resolve();
             }
           },
         }),

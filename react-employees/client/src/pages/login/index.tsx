@@ -35,9 +35,13 @@ export const Login = () => {
       <Row align="middle" justify="center">
         <Card title="Войдите" style={{ width: "30rem" }}>
           <Form onFinish={login}>
-            <CustomInput type="email" name="email" placeholder="placeholder" />
+            <CustomInput type="email" name="email" placeholder="email" />
             <PasswordInput name="password" placeholder="Пароль" />
-            <CustomButton type="primary" htmlType="submit">
+            <CustomButton
+              type="primary"
+              htmlType="submit"
+              loading={loginUserResult.isLoading}
+            >
               Войти
             </CustomButton>
           </Form>

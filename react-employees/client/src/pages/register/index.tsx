@@ -14,7 +14,7 @@ export const Register = () => {
         <Card title="Зарегиструйтесь" style={{ width: "30rem" }}>
           <Form onFinish={() => null}>
             <CustomInput name="name" placeholder="имя" />
-            <CustomInput type="email" name="email" placeholder="placeholder" />
+            <CustomInput type="email" name="email" placeholder="email" />
             <PasswordInput name="password" placeholder="Пароль" />
             <PasswordInput
               name="confirmPassword"
