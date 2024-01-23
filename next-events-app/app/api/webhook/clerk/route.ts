@@ -96,6 +96,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: 'OK', user: updatedUser })
   }
+
+  
   if (eventType === 'user.deleted') {
     const { id } = evt.data
 

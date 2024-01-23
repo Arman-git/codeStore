@@ -1,6 +1,6 @@
-"use server";
-
 'use server'
+
+
 
 import { revalidatePath } from 'next/cache'
 
@@ -12,7 +12,8 @@ import { handleError } from '@/lib/utils'
 
 import { CreateUserParams, UpdateUserParams } from '@/types'
 
-export async function createUser(user: CreateUserParams) {
+
+export const createUser = async (user: CreateUserParams) => {
   try {
     await connectToDatabase()
 
