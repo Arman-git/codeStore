@@ -1,5 +1,5 @@
 "use client";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 
@@ -18,6 +18,18 @@ const Auth = () => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      console.log(formData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setFormData(defaultFormData);
+    }
+  };
   return (
     <section className="container mx-auto">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8 w-80 md:w-[70%] mx-auto">
@@ -31,7 +43,7 @@ const Auth = () => {
             <FcGoogle className="ml-3 text-4xl cursor-pointer" />
           </span>
         </div>
-        <form className="space-y-4 md:space-y-4">
+        <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
           <input
             type="email"
             name="email"
@@ -58,6 +70,8 @@ const Auth = () => {
             minLength={6}
             className={inputStyles}
             value={formData.password}
+            onChange={handleInputChange}
+            autoComplete="on"
           />
           <button
             type="submit"
