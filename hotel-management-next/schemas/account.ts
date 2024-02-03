@@ -35,9 +35,6 @@ const account = {
             type: 'reference',
             to: { type: 'user'},
         }),
-        defineField({
-            
-        })
     ]
 };
 
