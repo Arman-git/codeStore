@@ -27,12 +27,13 @@ const Auth = () => {
     event.preventDefault();
 
     try {
-      const user = await signUp(formData)
+      const user = await signUp(formData);
       if(user) {
         toast.success("Success. Please sign in")
       }
     } catch (error) {
       console.log(error);
+      toast.error('Something went wrong')
     } finally {
       setFormData(defaultFormData);
     }
