@@ -60,7 +60,7 @@ const Auth = () => {
           </h1>
           <p>OR</p>
           <span className="inline-flex items-center">
-            <AiFillGithub onClick={loginHandler} className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />
+            <AiFillGithub onClick={loginHandler} className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />{' '} |
             <FcGoogle onClick={loginHandler} className="ml-3 text-4xl cursor-pointer" />
           </span>
         </div>
