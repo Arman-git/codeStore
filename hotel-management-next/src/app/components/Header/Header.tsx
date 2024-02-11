@@ -4,16 +4,16 @@ import Link from "next/link";
 import { useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
-import Image from 'next/image';
-import ThemeContext from "@/Context/themeContext";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
+import ThemeContext from "@/Context/themeContext";
 
 const Header = () => {
   const { darkTheme, setDarkTheme } = useContext(ThemeContext);
 
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
-  console.log(session)
+  console.log(session);
 
   return (
     <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between">
@@ -25,24 +25,24 @@ const Header = () => {
           <li className="flex items-center">
             {session?.user ? (
               <Link href={`/users/${session.user.id}`}>
-              {session.user.image ? (
-                <div className='w-10 h-10 rounded-full overflow-hidden'>
-                  <Image 
-                  src={session.user.image}
-                  alt={session.user.name!}
-                  width={40}  
-                  height={40}
-                  className="scale-animation img"
-                  />
-                </div>
-              ) : (
-                <FaUserCircle className="cursor-pointer" />
-              )}
-            </Link>
+                {session.user.image ? (
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name!}
+                      width={40}
+                      height={40}
+                      className="scale-animation img"
+                    />
+                  </div>
+                ) : (
+                  <FaUserCircle className="cursor-pointer" />
+                )}
+              </Link>
             ) : (
               <Link href="/auth">
-              <FaUserCircle className="cursor-pointer" />
-            </Link>
+                <FaUserCircle className="cursor-pointer" />
+              </Link>
             )}
           </li>
           <li className="ml-2">
