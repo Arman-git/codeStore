@@ -13,7 +13,7 @@ const Header = () => {
 
   const { data: session } = useSession();
 
-  console.log(session);
+  // console.log(session);
 
   return (
     <header className="py-10 px-4 container mx-auto text-xl flex flex-wrap md:flex-nowrap items-center justify-between">

@@ -30,6 +30,7 @@ const Gallery = () => {
               src="/images/hero-3.jpeg"
               width={200}
               height={200}
+              priority={false}
             />
           </div>
         </div>
