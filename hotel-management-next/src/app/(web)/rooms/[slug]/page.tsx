@@ -5,11 +5,19 @@ import useSWR from "swr";
 import LoadingSpinner from "../../loading";
 import HotelPhotoGallery from "@/app/components/HotelPhotoGallery/HotelPhotoGallery";
 import { MdOutlineCleaningServices } from "react-icons/md";
+import { LiaFireExtinguisherSolid } from "react-icons/lia";
+import { AiOutlineMedicineBox } from "react-icons/ai";
+import { GiSmokeBomb } from "react-icons/gi";
+import BookRoomCta from "@/app/components/BookRoomCta/BookRoomCta";
+import { useState } from "react";
 
 const RoomDetails = (props: { params: { slug: string } }) => {
   const {
     params: { slug },
   } = props;
+
+  const [checkinDate, setCheckinDate] = useState<Date | null>(null);
+  const [checkoutDate, setCheckoutDate] = useState<Date | null>(null);
 
   const fetchRoom = async () => getRoom(slug);
   const { data: room, error, isLoading } = useSWR("/api/room", fetchRoom);
@@ -71,12 +79,44 @@ const RoomDetails = (props: { params: { slug: string } }) => {
                     <MdOutlineCleaningServices />
                     <p className="ml-2 md:text-base text-xs">Daily Cleaning</p>
                   </div>
+                  <div className="flex items-center my-1 md:my-0">
+                    <LiaFireExtinguisherSolid />
+                    <p className="ml-2 md:text-base text-xs">
+                      Fire Extinguishers
+                    </p>
+                  </div>
+                  <div className="flex items-center my-1 md:my-0">
+                    <AiOutlineMedicineBox />
+                    <p className="ml-2 md:text-base text-xs">
+                      Disinfections and Sterilizations
+                    </p>
+                  </div>
+                  <div className="flex items-center my-1 md:my-0">
+                    <GiSmokeBomb />
+                    <p className="ml-2 md:text-base text-xs">Smoke Detectors</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="shadow dark:shadow-white rounded-lg p-6">
+                <div className="items-center mb-4">
+                  <p className="md:text-lg font-semibold">Customer Service</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Reviews */}
                 </div>
               </div>
             </div>
           </div>
+
           <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white sticky top-10 h-fit overflow-auto">
-            {/* BOOK ROOM CTA */}
+            <BookRoomCta
+              discount={room.discount}
+              price={room.price}
+              specialNote={room.specialNote}
+              checkinDate={checkinDate}
+              setCheckinDate={setCheckinDate}
+            />
           </div>
         </div>
       </div>
