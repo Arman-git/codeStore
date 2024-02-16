@@ -4,6 +4,7 @@ import { Image as ImageType } from "@/models/room";
 import Image from "next/image";
 import { FC, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -102,7 +103,7 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
         </div>
         {showModal && (
           <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-90 z-[55]">
-            <div className="h-[75bh] w-[320px] md:w-[700px] relative">
+            <div className="h-[75vh] w-[320px] md:w-[700px] relative">
               <Image
                 src={photos[currentPhotoIndex].url}
                 alt={`Room Photo ${currentPhotoIndex + 1}`}
@@ -110,6 +111,28 @@ const HotelPhotoGallery: FC<{ photos: ImageType[] }> = ({ photos }) => {
                 height={150}
                 className="img"
               />
+              <div className="flex justify-between items-center py-3">
+                <div className="flex space-x-2 items-center text-white">
+                  <FaArrowLeft
+                    className="cursor-pointer"
+                    onClick={handlePrevious}
+                  />
+                  <FaArrowRight
+                    className="cursor-pointer"
+                    onClick={handleNext}
+                  />
+                </div>
+                <span className=" text-white text-lg">
+                  {currentPhotoIndex + 1} / {photos.length}
+                </span>
+              </div>
+
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-white"
+              >
+                <MdCancel className="font-medium text-2xl text-tertiary-dark" />
+              </button>
             </div>
           </div>
         )}
