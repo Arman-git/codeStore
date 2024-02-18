@@ -7,15 +7,46 @@ import "react-datepicker/dist/react-datepicker.css";
 type Props = {
   checkinDate: Date | null;
   setCheckinDate: Dispatch<SetStateAction<Date | null>>;
+  checkoutDate: Date | null;
+  setCheckoutDate: Dispatch<SetStateAction<Date | null>>;
+  setAdults: Dispatch<SetStateAction<number>>;
+  setChildren: Dispatch<SetStateAction<number>>;
+  calcMinCheckoutDate: () => Date | null;
   price: number;
   discount: number;
   specialNote: string;
+  adults: number;
+  children: number;
+  isBooked: boolean;
+  handleBookNowClick: () => void;
 };
 
 const BookRoomCta: FC<Props> = (props) => {
-  const { price, discount, specialNote, checkinDate, setCheckinDate } = props;
+  const {
+    price,
+    discount,
+    specialNote,
+    checkinDate,
+    setCheckinDate,
+    setCheckoutDate,
+    checkoutDate,
+    calcMinCheckoutDate,
+    setAdults,
+    setChildren,
+    adults,
+    children,
+    isBooked,
+    handleBookNowClick,
+  } = props;
 
   const discountPrice = price - (price / 100) * discount;
+
+  const calcNoOfDays = () => {
+    if (!checkinDate || !checkoutDate) return 0;
+    const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+    const noOfDays = Math.ceil(timeDiff / (24 * 60 * 60 * 1000));
+    return noOfDays;
+  };
 
   return (
     <div className="px-7 py-6">
@@ -55,7 +86,74 @@ const BookRoomCta: FC<Props> = (props) => {
             className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary-600"
           />
         </div>
+        <div className="w-1/2 pl-2">
+          <label
+            htmlFor="check-out-date"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-400"
+          >
+            Check Out Date
+          </label>
+          <DatePicker
+            selected={checkoutDate}
+            onChange={(date) => setCheckoutDate(date)}
+            dateFormat="dd/MM/yyyy"
+            disabled={!checkinDate}
+            minDate={calcMinCheckoutDate()}
+            id="check-out-date"
+            className="w-full border text-black border-gray-300 rounded-lg p-2.5 focus:ring-primary focus:border-primary-600"
+          />
+        </div>
       </div>
+      <div className="flex mt-4">
+        <div className="w-1/2 pr-2">
+          <label
+            htmlFor="adults"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-400 "
+          >
+            Adults
+          </label>
+          <input
+            type="number"
+            id="adults"
+            value={adults}
+            onChange={(e) => setAdults(+e.target.value)}
+            min={1}
+            max={5}
+            className="w-full border border-gray-300 rounded-lg p-2.5"
+          />
+        </div>
+        <div className="w-1/2 pl-2">
+          <label
+            htmlFor="children"
+            className="block text-sm font-medium text-gray-900 dark:text-gray-400 "
+          >
+            Children
+          </label>
+          <input
+            type="number"
+            id="children"
+            value={children}
+            onChange={(e) => setChildren(+e.target.value)}
+            min={0}
+            max={3}
+            className="w-full border border-gray-300 rounded-lg p-2.5"
+          />
+        </div>
+      </div>
+
+      {calcNoOfDays() > 0 ? (
+        <p className="mt-3">Total price: $ {calcNoOfDays() * discountPrice}</p>
+      ) : (
+        <></>
+      )}
+
+      <button
+        disabled={isBooked}
+        onClick={handleBookNowClick}
+        className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
+      >
+        {isBooked ? "Booked" : "Book Now"}
+      </button>
     </div>
   );
 };
