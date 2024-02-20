@@ -46,7 +46,7 @@ const RoomDetails = (props: { params: { slug: string } }) => {
     if (!checkinDate || !checkoutDate)
       return toast.error("Please provide checkin / checkout date");
 
-    if (checkinDate || !checkoutDate)
+    if (!checkinDate || !checkoutDate)
       return toast.error("Please choose a valid checkin period");
 
     const numberOfDays = calcNumDays();
