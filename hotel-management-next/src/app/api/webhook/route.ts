@@ -20,6 +20,8 @@ export async function POST(req: Request, res: Response) {
   } catch (error: any) {
     return new NextResponse(`Webhook Error: ${error.message}`, { status: 500 });
   }
+
+  console.log(event);
   //load our event
   switch (event.type) {
     case checkout_session_completed:
@@ -37,7 +39,7 @@ export async function POST(req: Request, res: Response) {
       console.log(`Unhandled event type ${event.type}`);
   }
 
-  return NextResponse.json("Booking successfull", {
+  return NextResponse.json("Event Received", {
     status: 200,
     statusText: "Event Received",
   });
