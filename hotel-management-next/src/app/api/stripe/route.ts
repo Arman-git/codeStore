@@ -70,6 +70,17 @@ export async function POST(req: Request, res: Response) {
       ],
       payment_method_types: ["card"],
       success_url: `${origin}/users/${userId}`,
+      metadata: {
+        adults,
+        checkinDate,
+        checkoutDate,
+        children,
+        hotelRoom: room._id,
+        numberOfDays,
+        user: userId,
+        totalPrice,
+        discount: room.discount,
+      },
     });
     return NextResponse.json(stripeSession, {
       status: 200,
