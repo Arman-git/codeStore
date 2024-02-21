@@ -27,9 +27,34 @@ export async function POST(req: Request, res: Response) {
   switch (event.type) {
     case checkout_session_completed:
       const session = event.data.object;
-      console.log("session =>", session);
 
-      // await createBooking({ adults, checkinDate });
+      const {
+        //@ts-ignore
+        metadata: {
+          adults,
+          checkinDate,
+          checkoutDate,
+          children,
+          hotelRoom,
+          numberOfDays,
+          user,
+          discount,
+          totalPrice,
+        },
+      } = session;
+      await createBooking({
+        adults: Number(adults),
+        checkinDate,
+        checkoutDate,
+        children: Number(children),
+        hotelRoom,
+        numberOfDays: Number(numberOfDays),
+        discount: Number(discount),
+        totalPrice: Number(totalPrice),
+        user,
+      });
+
+      return;
       //Create a booking
 
       return NextResponse.json("Booking successfull", {
