@@ -1,6 +1,6 @@
-import { createBooking, updateHotelRoom } from "@/libs/apis";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { createBooking, updateHotelRoom } from "@/libs/apis";
 
 const checkout_session_completed = "checkout.session.completed";
 
@@ -28,6 +28,8 @@ export async function POST(req: Request, res: Response) {
     case checkout_session_completed:
       const session = event.data.object;
 
+      console.log(session);
+
       const {
         //@ts-ignore
         metadata: {
@@ -42,6 +44,7 @@ export async function POST(req: Request, res: Response) {
           totalPrice,
         },
       } = session;
+
       await createBooking({
         adults: Number(adults),
         checkinDate,
