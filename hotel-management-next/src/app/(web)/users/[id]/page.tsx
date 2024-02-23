@@ -8,15 +8,16 @@ const UserDetails = (props: { params: { id: string } }) => {
     params: { id: userId },
   } = props;
   const fetchUserBooking = async () => getUserBookings(userId);
+
   const {
     data: userBookings,
     error,
     isLoading,
   } = useSWR("/api/userbooking", fetchUserBooking);
 
-  //   if (error) throw new Error("Cannot fetch data");
-  //   if (typeof userBookings === "undefined" && !isLoading)
-  //     throw new Error("Cannot fetch data");
+  if (error) throw new Error("Cannot fetch data");
+  if (typeof userBookings === "undefined" && !isLoading)
+    throw new Error("Cannot fetch data");
 
   console.log(userBookings);
 
