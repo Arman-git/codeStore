@@ -29,8 +29,14 @@ const UserDetails = (props: { params: { id: string } }) => {
 
   const [roomId, setRoomId] = useState<string | null>(null);
   const [isRatingVisible, setIsRatingVisible] = useState(false);
+  const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+  const [ratingValue, setRatingValue] = useState(0);
+  const [ratingText, setRatingText] = useState(" ");
 
   const toggleRatingModal = () => setIsRatingVisible((prevState) => !prevState);
+  const reviewSubmitHundler = async () => {
+    //
+  };
 
   const fetchUserBooking = async () => getUserBookings(userId);
   const fetchUserData = async () => {
@@ -167,7 +173,16 @@ const UserDetails = (props: { params: { id: string } }) => {
         </div>
       </div>
 
-      <RatingModal isOpen={isRatingVisible} />
+      <RatingModal
+        isOpen={isRatingVisible}
+        ratingValue={ratingValue}
+        setRatingValue={setRatingValue}
+        ratingText={ratingText}
+        setRatingText={setRatingText}
+        reviewSubmitHundler={reviewSubmitHundler}
+        isSubmittingReview={isSubmittingReview}
+        toggleRatingModal={toggleRatingModal}
+      />
       <BackDrop isOpen={isRatingVisible} />
     </div>
   );
