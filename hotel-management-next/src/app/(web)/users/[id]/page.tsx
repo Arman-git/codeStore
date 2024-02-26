@@ -17,6 +17,7 @@ import Table from "@/app/components/Table/Table";
 import Chart from "@/app/components/Chart/Chart";
 import RatingModal from "@/app/components/RatingModal/RatingModal";
 import BackDrop from "@/app/components/BackDrop/BackDrop";
+import toast from "react-hot-toast";
 
 const UserDetails = (props: { params: { id: string } }) => {
   const {
@@ -35,7 +36,9 @@ const UserDetails = (props: { params: { id: string } }) => {
 
   const toggleRatingModal = () => setIsRatingVisible((prevState) => !prevState);
   const reviewSubmitHundler = async () => {
-    //
+    if (!ratingText.trim().length || !ratingValue) {
+      return toast.error("Please provide a rating text and a rating ");
+    }
   };
 
   const fetchUserBooking = async () => getUserBookings(userId);
