@@ -31,13 +31,36 @@ const UserDetails = (props: { params: { id: string } }) => {
   const [roomId, setRoomId] = useState<string | null>(null);
   const [isRatingVisible, setIsRatingVisible] = useState(false);
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
-  const [ratingValue, setRatingValue] = useState(0);
+  const [ratingValue, setRatingValue] = useState<number | null>(0);
   const [ratingText, setRatingText] = useState(" ");
 
   const toggleRatingModal = () => setIsRatingVisible((prevState) => !prevState);
   const reviewSubmitHundler = async () => {
     if (!ratingText.trim().length || !ratingValue) {
-      return toast.error("Please provide a rating text and a rating ");
+      return toast.error("Please provide a rating text and a rating");
+    }
+
+    if (!roomId) toast.error("Id not provided");
+
+    setIsSubmittingReview(true);
+
+    try {
+      const { data } = await axios.post("/api/users", {
+        roomId,
+        ratingValue,
+        reviewText: ratingText,
+      });
+      console.log(data);
+      toast.success("Review Submitted");
+    } catch (error) {
+      console.log(error);
+      toast.error("Review Failed");
+    } finally {
+      setRatingText("");
+      setRatingValue(null);
+      setRoomId(null);
+      setIsSubmittingReview(false);
+      setIsRatingVisible(false);
     }
   };
 
