@@ -95,7 +95,7 @@ const UserDetails = (props: { params: { id: string } }) => {
     <div className="constainer mx-auto px-2 md:px-4 py-10">
       <div className="grid md:grid-cols-12 gap-10">
         <div className="hidden md:block md:col-span-4 lg:col-span-3 shadow-lg h-fit sticky top-10 bg-[#eff0f2] text-black rounded-lg px-6 py-4">
-          <div className="md:w-[143px] w-38 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden">
+          <div className="md:w-[143px] w-28 h-28 md:h-[143px] mx-auto mb-5 rounded-full overflow-hidden">
             <Image
               src={userData.image}
               alt={userData.name}
@@ -109,7 +109,7 @@ const UserDetails = (props: { params: { id: string } }) => {
             <p className="text-sm">{userData.about ?? ""}</p>
           </div>
           <div className="font-normal text-left">
-            <h6 className="text-xl fonst-bold opb-3">{userData.name}</h6>
+            <h6 className="text-xl fonst-bold pb-3">{userData.name}</h6>
           </div>
           <div className="flex items-center">
             <p className="mr-2">Sign Out</p>
