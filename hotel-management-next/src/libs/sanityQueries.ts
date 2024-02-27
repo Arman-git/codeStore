@@ -71,7 +71,7 @@ _createdAt,
 image,
 }`;
 
-export const getRoomReviewsQuery = groq`*[_type == 'review' && hotelRoom._ref === $roomId] {
+export const getRoomReviewsQuery = groq`*[_type == "review" && hotelRoom._ref == $roomId] {
     _createdAt,
     _id,
     text,

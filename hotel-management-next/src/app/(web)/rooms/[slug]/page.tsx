@@ -13,6 +13,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { getStripe } from "@/libs/stripe";
+import RoomReview from "@/app/components/RoomReview/RoomReview";
 
 const RoomDetails = (props: { params: { slug: string } }) => {
   const {
@@ -163,7 +164,7 @@ const RoomDetails = (props: { params: { slug: string } }) => {
                   <p className="md:text-lg font-semibold">Customer Service</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Reviews */}
+                  <RoomReview roomId={room._id} />
                 </div>
               </div>
             </div>
