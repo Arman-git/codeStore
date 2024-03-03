@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const UserController = require("../controllers/user-controller.js");
+const UserController = require("../controllers");
 
 const uploadDestionation = "uploads";
 
