@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const UserController = require("../controllers");
+const { UserController } = require("../controllers");
 
 const uploadDestionation = "uploads";
 
@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const uploads = multer({ storage: storage });
+const upload = multer({ storage: storage });
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
