@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const { UserController } = require("../controllers");
+const UserController = require("../controllers/user-controller");
+const PostController = require("../controllers/post-controller");
 const { authenticationToken } = require("../middleware/auth");
+const multer = require("multer");
 
 const uploadDestionation = "uploads";
 
@@ -16,10 +17,17 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+//Роуты пользователей
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/current", authenticationToken, UserController.current);
 router.get("/users/:id", authenticationToken, UserController.getUserById);
 router.put("/users/:id", authenticationToken, UserController.updateUser);
+
+//Роуты постов
+router.post("/posts", authenticationToken, PostController.createPost);
+router.get("/posts", authenticationToken, PostController.getAllPosts);
+router.get("/posts/:id", authenticationToken, PostController.getPostById);
+router.delete("/posts/:id", authenticationToken, PostController.deletePost);
 
 module.exports = router;
