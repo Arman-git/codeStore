@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/user-controller");
 const PostController = require("../controllers/post-controller");
+const CommentController = require("../controllers/comment-controller");
 const { authenticationToken } = require("../middleware/auth");
 const multer = require("multer");
 
@@ -29,5 +30,13 @@ router.post("/posts", authenticationToken, PostController.createPost);
 router.get("/posts", authenticationToken, PostController.getAllPosts);
 router.get("/posts/:id", authenticationToken, PostController.getPostById);
 router.delete("/posts/:id", authenticationToken, PostController.deletePost);
+
+//Роуты комментариев
+router.post("/comments", authenticationToken, CommentController.createComment);
+router.delete(
+  "/comments/:id",
+  authenticationToken,
+  CommentController.deleteComment
+);
 
 module.exports = router;
