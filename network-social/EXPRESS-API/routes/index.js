@@ -6,6 +6,7 @@ const CommentController = require("../controllers/comment-controller");
 const { authenticationToken } = require("../middleware/auth");
 const multer = require("multer");
 const LikeController = require("../controllers/like-controller");
+const FollowController = require("../controllers/follow-controller");
 
 const uploadDestionation = "uploads";
 
@@ -43,5 +44,13 @@ router.delete(
 //Роуты лайков
 router.post("/likes", authenticationToken, LikeController.likePost);
 router.delete("/likes/:id", authenticationToken, LikeController.unlikePost);
+
+//Роуты подписок
+router.post("/follow", authenticationToken, FollowController.followUser);
+router.delete(
+  "/unfollow/:id",
+  authenticationToken,
+  FollowController.unfollowUser
+);
 
 module.exports = router;
