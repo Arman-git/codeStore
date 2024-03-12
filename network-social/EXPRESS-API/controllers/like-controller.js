@@ -43,16 +43,16 @@ const LikeController = {
     }
     try {
       const existingLike = await prisma.like.findFirst({
-        where: { postId, userId },
+        where: { postId: id, userId },
       });
 
       if (!existingLike) {
         return res.status(400).json({
-          error: "Лайк уже существует!",
+          error: "Нельзя поставить дизлайк!",
         });
       }
       const like = await prisma.like.deleteMany({
-        where: { postId, id, userId },
+        where: { postId: id, userId },
       });
 
       res.json(like);
