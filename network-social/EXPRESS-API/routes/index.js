@@ -5,6 +5,7 @@ const PostController = require("../controllers/post-controller");
 const CommentController = require("../controllers/comment-controller");
 const { authenticationToken } = require("../middleware/auth");
 const multer = require("multer");
+const LikeController = require("../controllers/like-controller");
 
 const uploadDestionation = "uploads";
 
@@ -38,5 +39,9 @@ router.delete(
   authenticationToken,
   CommentController.deleteComment
 );
+
+//Роуты лайков
+router.post("/likes", authenticationToken, LikeController.likePost);
+router.delete("/likes/:id", authenticationToken, LikeController.unlikePost);
 
 module.exports = router;
