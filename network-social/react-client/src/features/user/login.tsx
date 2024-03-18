@@ -1,42 +1,48 @@
-import { Button, Link } from "@nextui-org/react"
-import { useState } from "react"
-import { Input } from "../components/input"
 import { useForm } from "react-hook-form"
-import { useRegisterMutation } from "../app/services/userApi"
-import { hasErrorField } from "../utils/has-error-field"
-import { ErrorMessage } from "../components/error-messages"
+import { Input } from "../../components/input"
+import { Button, Link } from "@nextui-org/react"
+import {
+  useLazyCurrentQuery,
+  useLoginMutation,
+} from "../../app/services/userApi"
+import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { ErrorMessage } from "../../components/error-messages"
+import { hasErrorField } from "../../utils/has-error-field"
 
-type Register = {
+type Login = {
   email: string
-  name: string
   password: string
 }
+
 type Props = {
   setSelected: (value: string) => void
 }
 
-export const Register: React.FC<Props> = ({ setSelected }) => {
+export const Login: React.FC<Props> = ({ setSelected }: Props) => {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<Register>({
+  } = useForm<Login>({
     mode: "onChange",
     reValidateMode: "onBlur",
     defaultValues: {
       email: "",
       password: "",
-      name: "",
     },
   })
 
-  const [register, { isLoading }] = useRegisterMutation()
+  const [login, { isLoading }] = useLoginMutation()
+  const navigate = useNavigate()
   const [error, setError] = useState("")
+  const [triggerCurrentQuery] = useLazyCurrentQuery()
 
-  const onSubmit = async (data: Register) => {
+  const onSubmit = async (data: Login) => {
     try {
-      await register(data).unwrap()
-      setSelected("login")
+      await login(data).unwrap()
+      await triggerCurrentQuery()
+      navigate("/")
     } catch (error) {
       if (hasErrorField(error)) {
         setError(error.data.error)
@@ -46,13 +52,6 @@ export const Register: React.FC<Props> = ({ setSelected }) => {
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        control={control}
-        name="name"
-        label="name"
-        type="text"
-        required="Обязательное поле"
-      />
       <Input
         control={control}
         name="email"
@@ -69,18 +68,18 @@ export const Register: React.FC<Props> = ({ setSelected }) => {
       />
       <ErrorMessage error={error} />
       <p className="text-center text-small">
-        Уже есть аккаунт?{" "}
+        Нет аккаунта?{" "}
         <Link
           size="sm"
           className="cursor-pointer"
-          onPress={() => setSelected("login")}
+          onPress={() => setSelected("sign-up")}
         >
-          Войти
+          Зарегиструйтесь
         </Link>
       </p>
       <div className="flex gap-2 justify-end">
         <Button fullWidth color="primary" type="submit" isLoading={isLoading}>
-          Зарегистрироваться
+          Войти
         </Button>
       </div>
     </form>
