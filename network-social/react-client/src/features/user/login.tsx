@@ -19,7 +19,7 @@ type Props = {
   setSelected: (value: string) => void
 }
 
-export const Login: React.FC<Props> = ({ setSelected }: Props) => {
+export const Login = ({ setSelected }: Props) => {
   const {
     handleSubmit,
     control,

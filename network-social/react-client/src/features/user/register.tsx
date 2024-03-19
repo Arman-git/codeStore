@@ -15,7 +15,7 @@ type Props = {
   setSelected: (value: string) => void
 }
 
-export const Register: React.FC<Props> = ({ setSelected }) => {
+export const Register = ({ setSelected }: Props) => {
   const {
     handleSubmit,
     control,

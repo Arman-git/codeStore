@@ -1,12 +1,11 @@
-import { Header } from "../header"
-import { Container } from "../container"
-import { Outlet, useNavigate } from "react-router-dom"
-import { NavBar } from "../nav-bar"
-// import { useSelector } from "react-redux"
-import { selectIsAuthenticated, selectUser } from "../../features/user/useSlice"
-import { useAppSelector } from "../../app/hooks"
 import { useEffect } from "react"
+import { Container } from "../container"
+import { NavBar } from "../nav-bar"
+import { Outlet, useNavigate } from "react-router-dom"
 import { Profile } from "../profile"
+import { useAppSelector } from "../../app/hooks"
+import { selectIsAuthenticated, selectUser } from "../../features/user/useSlice"
+import { Header } from "../header"
 
 export const Layout = () => {
   const isAuthenticated = useAppSelector(selectIsAuthenticated)
