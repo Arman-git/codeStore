@@ -8,5 +8,5 @@ export const AuthGuard = ({ children }: { children: JSX.Element }) => {
     return <Spinner />
   }
 
-  // return children
+  return children
 }

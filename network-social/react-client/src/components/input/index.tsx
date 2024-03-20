@@ -1,4 +1,3 @@
-import React from "react"
 import { useController, type Control } from "react-hook-form"
 import { Input as NextInput } from "@nextui-org/react"
 
@@ -44,6 +43,7 @@ export const Input = ({
       onChange={field.onChange}
       onBlur={field.onBlur}
       errorMessage={`${errors[name]?.message ?? ""}`}
+      endContent={endContent}
     />
   )
 }
