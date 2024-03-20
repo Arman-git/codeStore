@@ -5,7 +5,7 @@ export const Posts = () => {
 
   return (
     <>
-      <div className="mb-10 w-full"></div>
+      <div className="mb-10 w-full">Posts</div>
     </>
   )
 }
