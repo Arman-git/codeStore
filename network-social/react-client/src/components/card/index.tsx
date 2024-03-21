@@ -8,7 +8,10 @@ import {
   Card as NextUiCard,
   Spinner,
 } from "@nextui-org/react"
-import { useLikePostMutation } from "../../app/services/likesApi"
+import {
+  useLikePostMutation,
+  useUnlikePostMutation,
+} from "../../app/services/likesApi"
 import {
   useDeletePostMutation,
   useLazyGetAllPostsQuery,
@@ -57,7 +60,7 @@ export const Card: React.FC<Props> = ({
   likedByUser = false,
 }) => {
   const [likePost] = useLikePostMutation()
-  const [unlikePost] = useLikePostMutation()
+  const [unlikePost] = useUnlikePostMutation()
   const [triggerGetAllPosts] = useLazyGetAllPostsQuery()
   const [triggerGetPostById] = useLazyGetPostByIdQuery()
   const [deletePost, deletePostStatus] = useDeletePostMutation()
@@ -85,7 +88,7 @@ export const Card: React.FC<Props> = ({
   const handleClick = async () => {
     try {
       likedByUser
-        ? await unlikePost({ postId: id }).unwrap()
+        ? await unlikePost(id).unwrap()
         : await likePost({ postId: id }).unwrap()
 
       await refetchPosts()
@@ -110,7 +113,7 @@ export const Card: React.FC<Props> = ({
           navigate("/")
           break
         case "comment":
-          await deleteComment(id).unwrap()
+          await deleteComment(commentId).unwrap()
           await refetchPosts()
           break
         default:
