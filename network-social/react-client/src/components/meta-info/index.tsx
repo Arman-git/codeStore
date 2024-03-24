@@ -7,7 +7,7 @@ type Props = {
 
 export const MetaInfo: React.FC<Props> = ({ count, Icon }) => {
   return (
-    <div>
+    <div className="flex items-center gap-2 cursor-pointer">
       {count > 0 && (
         <p className="font-semibold text-default-400 text-1">{count}</p>
       )}
