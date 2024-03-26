@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const uploads = multer({ storage: storage });
 
 //Роуты пользователей
 router.post("/register", UserController.register);
@@ -29,7 +29,7 @@ router.put("/users/:id", authenticationToken, UserController.updateUser);
 router.put(
   "/users/:id",
   authenticationToken,
-  upload.single("avatar"),
+  uploads.single("avatar"),
   UserController.updateUser
 );
 
