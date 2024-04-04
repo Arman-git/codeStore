@@ -8,7 +8,7 @@ body {
   flex-direction: column;
 }
 .container {
-  max-width: 1535px;
+  max-width: 1835px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -18,6 +18,12 @@ body {
   cursor: pointer;
   background-color: transparent;
   border: none;
+  color: #e8e9ea;
+}
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 @font-face {
   font-display: swap;
