@@ -16,7 +16,7 @@ const Header = () => {
         </div>
         <ul className='header__links list-reset'>
           <li className='header__links__item'>
-            <button className='header__links__item__btn header__links__item__btn--search' />
+            <button className='btn-reset header__links__item__btn header__links__item__btn--search' />
           </li>
           <li className='header__links__item'>
             <Link
