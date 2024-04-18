@@ -141,7 +141,11 @@ const CatalogMenu = () => {
               </motion.h2>
               <ul className='list-reset catalog-menu__list'>
                 {items.map(({ id, name, items, handler }) => {
-                  console.log()
+                  const buttonProps = (isActive: boolean) => ({
+                    handler: handler as VoidFunction,
+                    name,
+                    isActive,
+                  })
                   return (
                     <motion.li
                       key={id}
