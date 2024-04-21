@@ -13,7 +13,7 @@ export const useMenuAnimation = (zIndex: number, popupIsOpen: boolean) => {
   const sideVariants = {
     closed: {
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.05,
         staggerDirection: -1,
       },
     },

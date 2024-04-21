@@ -8,6 +8,8 @@ import Header from './Header'
 import { removeOverflowHiddenFromBody } from '@/lib/utills/common'
 import { useUnit } from 'effector-react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import CatalogMenuButton from './CatalogMenuButton'
+import CatalogMenuList from './CatalogMenuList'
 
 const CatalogMenu = () => {
   const catalogMenuIsOpen = useUnit($catalogMenuIsOpen)
@@ -20,7 +22,7 @@ const CatalogMenu = () => {
     2,
     catalogMenuIsOpen
   )
-  const isMedia640 = useMediaQuery(640)
+  const isMedia450 = useMediaQuery(450)
 
   const handleShowClothList = () => {
     setShowClothList(true)
@@ -146,13 +148,57 @@ const CatalogMenu = () => {
                     name,
                     isActive,
                   })
+                  const isCurrentList = (
+                    showList: Boolean,
+                    currentId: number
+                  ) => showList && id === currentId
+
                   return (
                     <motion.li
                       key={id}
                       variants={itemVariants}
                       className='catalog-menu__list__item'
                     >
-                      {!isMedia640 && <></>}
+                      {!isMedia450 && (
+                        <>
+                          {id === 1 && (
+                            <CatalogMenuButton
+                              {...buttonProps(showClothList)}
+                            />
+                          )}
+                          {id === 2 && (
+                            <CatalogMenuButton
+                              {...buttonProps(showAccessoriesList)}
+                            />
+                          )}
+                          {id === 3 && (
+                            <CatalogMenuButton
+                              {...buttonProps(showSouvenirsList)}
+                            />
+                          )}
+                          {id === 4 && (
+                            <CatalogMenuButton
+                              {...buttonProps(showOfficeList)}
+                            />
+                          )}
+                        </>
+                      )}
+                      {!isMedia450 && (
+                        <AnimatePresence>
+                          {isCurrentList(showClothList, 1) && (
+                            <CatalogMenuList items={items} />
+                          )}
+                          {isCurrentList(showAccessoriesList, 2) && (
+                            <CatalogMenuList items={items} />
+                          )}
+                          {isCurrentList(showSouvenirsList, 3) && (
+                            <CatalogMenuList items={items} />
+                          )}
+                          {isCurrentList(showOfficeList, 4) && (
+                            <CatalogMenuList items={items} />
+                          )}
+                        </AnimatePresence>
+                      )}
                     </motion.li>
                   )
                 })}
