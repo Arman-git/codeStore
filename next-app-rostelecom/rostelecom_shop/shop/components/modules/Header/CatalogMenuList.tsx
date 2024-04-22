@@ -11,7 +11,7 @@ const CatalogMenuList = ({ items }: { items: string[] }) => (
     {items.map((title, i) => (
       <li
         key={i}
-        className='nav-menu__accordion__item__list__item'
+        className='nav-menu__accordion__item__list__item catalog__accordion__item__list__item'
         style={{ position: 'relative' }}
       >
         <Link

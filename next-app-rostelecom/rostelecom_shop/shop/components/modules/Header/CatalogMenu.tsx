@@ -10,6 +10,8 @@ import { useUnit } from 'effector-react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import CatalogMenuButton from './CatalogMenuButton'
 import CatalogMenuList from './CatalogMenuList'
+import Accordion from '../Accordion/Accordion'
+import Link from 'next/link'
 
 const CatalogMenu = () => {
   const catalogMenuIsOpen = useUnit($catalogMenuIsOpen)
@@ -68,7 +70,7 @@ const CatalogMenu = () => {
         translations[lang].comparison.hoodie,
         translations[lang].comparison.outerwear,
       ],
-      handler: () => setActiveListId(1),
+      handler: handleShowClothList,
     },
     {
       name: translations[lang].main_menu.accessories,
@@ -78,7 +80,7 @@ const CatalogMenu = () => {
         translations[lang].comparison.headdress,
         translations[lang].comparison.umbrella,
       ],
-      handler: () => setActiveListId(2),
+      handler: handleShowAccessoriesList,
     },
     {
       name: translations[lang].main_menu.souvenirs,
@@ -87,7 +89,7 @@ const CatalogMenu = () => {
         translations[lang].comparison['business-souvenirs'],
         translations[lang].comparison['promotional-souvenirs'],
       ],
-      handler: () => setActiveListId(3),
+      handler: handleShowSouvenirsList,
     },
     {
       name: translations[lang].main_menu.office,
@@ -96,7 +98,7 @@ const CatalogMenu = () => {
         translations[lang].comparison.notebook,
         translations[lang].comparison.pen,
       ],
-      handler: () => setActiveListId(4),
+      handler: handleShowOfficeList,
     },
   ]
 
@@ -143,7 +145,7 @@ const CatalogMenu = () => {
               </motion.h2>
               <ul className='list-reset catalog-menu__list'>
                 {items.map(({ id, name, items, handler }) => {
-                  const buttonProps = (isActive: boolean) => ({
+                  const buttonProps = (isActive: Boolean) => ({
                     handler: handler as VoidFunction,
                     name,
                     isActive,
@@ -198,6 +200,28 @@ const CatalogMenu = () => {
                             <CatalogMenuList items={items} />
                           )}
                         </AnimatePresence>
+                      )}
+                      {isMedia450 && (
+                        <Accordion
+                          title={name}
+                          titleClass='list-reset nav-menu__accordion__item__title'
+                        >
+                          <ul className='list-reset catalog__accordion__list'>
+                            {items.map((title, i) => (
+                              <li
+                                key={i}
+                                className='catalog__accordion__list__item'
+                              >
+                                <Link
+                                  href='/catalog'
+                                  className='nav-menu__accordion__item__list__item__link'
+                                >
+                                  {title}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </Accordion>
                       )}
                     </motion.li>
                   )
