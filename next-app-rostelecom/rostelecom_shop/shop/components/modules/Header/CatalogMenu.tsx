@@ -109,7 +109,7 @@ const CatalogMenu = () => {
           <motion.aside
             initial={{ width: 0 }}
             animate={{
-              width: 'calc(100% - 48px)',
+              width: '100%',
             }}
             exit={{
               width: 0,
@@ -127,11 +127,6 @@ const CatalogMenu = () => {
               exit='closed'
               variants={sideVariants}
             >
-              <img
-                className='catalog-menu__bg'
-                src='/img/menu-bg-small.png'
-                alt='menu background'
-              />
               <motion.button
                 className='btn-reset catalog-menu__close'
                 variants={itemVariants}
