@@ -7,6 +7,7 @@ import { useUnit } from 'effector-react'
 import { $searchModal } from '@/context/madals'
 import SearchModal from '../modules/Header/SearchModal'
 import { handleCloseSearchModal } from '@/lib/utills/common'
+import Footer from '../modules/Footer/Footer'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const isMedia800 = useMediaQuery(800)
@@ -33,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         }`}
         onClick={handleCloseSearchModal}
       />
-      <div className='' />
+      <Footer />
     </>
   )
 }
