@@ -5,6 +5,14 @@ import img2 from '@/public/img/orange-t.png'
 import img3 from '@/public/img/violet-t.png'
 import styles from '@/styles/main-page/index.module.scss'
 import stylesForAd from '@/styles/ad/index.module.scss'
+// import Swiper from 'swiper'
+// import { SwiperSlide } from 'swiper/react'
+import HeroSlide from './HeroSlide'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { EffectCoverflow } from 'swiper/modules'
+import { Swiper as SwiperType } from 'swiper/types'
+import 'swiper/css'
+import 'swiper/css/effect-coverflow'
 
 const Hero = () => {
   const { lang, translations } = useLang()
@@ -27,6 +35,8 @@ const Hero = () => {
       image: img3,
     },
   ]
+  const handleSlideClick = (e: SwiperType) => e.slideTo(e.clickedIndex)
+
   return (
     <section className={styles.hero}>
       <h1 className='visually-hidden'>
@@ -34,6 +44,30 @@ const Hero = () => {
       </h1>
       <div className={`container ${styles.hero__container}`}>
         <span className={stylesForAd.ad}>{translations[lang].common.ad}</span>
+        <Swiper
+          className={styles.hero__slider}
+          effect='coverflow'
+          coverflowEffect={{
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5,
+          }}
+          slidesPerView='auto'
+          initialSlide={2}
+          autoplay
+          loop
+          onClick={handleSlideClick}
+          modules={[EffectCoverflow]}
+          grabCursor
+          centeredSlides
+        >
+          {slides.map((slide) => (
+            <SwiperSlide className={styles.hero__slider__slide} key={slide.id}>
+              <HeroSlide slide={slide} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
         <div className={styles.hero__subtitle}>
           <div className={styles.hero__subtitle__rect} />
           <span>

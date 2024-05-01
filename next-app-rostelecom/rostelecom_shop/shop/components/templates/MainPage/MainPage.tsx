@@ -1,4 +1,4 @@
-import Hero from '@/components/modules/MainPage/Hero'
+import Hero from '@/components/modules/MainPage/Hero/Hero'
 
 const MainPage = () => (
   <main>
