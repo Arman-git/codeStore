@@ -54,10 +54,10 @@ const CatalogMenu = () => {
   const handleCloseMenu = () => {
     removeOverflowHiddenFromBody()
     closeCatalogMenu()
-    setShowClothList()
-    setShowAccessoriesList()
-    setShowSouvenirsList()
-    setShowOfficeList()
+    // setShowClothList()
+    // setShowAccessoriesList()
+    // setShowSouvenirsList()
+    // setShowOfficeList()
   }
 
   const items = [
